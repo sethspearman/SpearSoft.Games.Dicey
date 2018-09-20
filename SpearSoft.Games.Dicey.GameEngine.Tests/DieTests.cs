@@ -49,7 +49,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             }
             
             //assert
-            Assert.IsTrue(result, "roll method produced value higher than 6");
+            Assert.IsTrue(result, "roll method produced value that is less than or equal to 0");
         }
 
         [Test]
