@@ -4,19 +4,21 @@ namespace SpearSoft.Games.Dicey.GameEngine
 {
     public class Die
     {
-        public Die()
+        public Die(byte position)
         {
-            Rand.GetByte(this);
+            this.Value = Rand.GetByte();
+            Position = position;
         }
 
-        public int Value { get; set; }
+        public byte Value { get; private set; }
         public bool Locked { get; set; }
+        public byte Position { get; private set; }
 
         public void Roll()
         {
             if (!Locked)
             {
-                Rand.GetByte(this);
+                this.Value = Rand.GetByte();
             }
         }
 

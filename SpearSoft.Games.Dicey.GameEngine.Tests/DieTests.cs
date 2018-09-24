@@ -12,7 +12,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
         public void DieRoll_MaxValue_NotGreaterThan6()
         {
             //arrange
-            var d = new Die();
+            var d = new Die(1);
             var result = true;
             //act
             for (int i = 0; i < 1000; i++)
@@ -34,7 +34,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
         public void DieRoll_MinValue_NotLessThanOrEqualToZero()
         {
             //arrange
-            var d = new Die();
+            var d = new Die(1);
             var result = true;
             //act
             for (int i = 0; i < 1000; i++)
@@ -56,8 +56,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
         public void LockedDie_Roll_DoesNotChangeValue()
         {
             //arrange
-            var d = new Die();
-            d.Locked = true;
+            var d = new Die (1) {Locked = true};
             var result = true;
 
             //act

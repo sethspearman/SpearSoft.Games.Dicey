@@ -13,12 +13,12 @@ namespace SpearSoft.Games.Dicey.GameEngine
             Generator = new Random();
         }
 
-        public static void GetByte(Die die)
+        public static byte GetByte()
         {
             var i = Generator.Next(1,6);
             var result = Convert.ToByte(i);
 
-            die.Value = result;
+            return result;
 
         }
 
