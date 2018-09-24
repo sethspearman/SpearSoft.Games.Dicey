@@ -6,7 +6,7 @@
     //    //List<IRule> Rules { get; }
 
     //    //returns isvalid and score from hand
-    //    (bool, int) Validate();
+    //    (bool, int) Calculate();
     //}
 
     public struct DiceCalculationResult

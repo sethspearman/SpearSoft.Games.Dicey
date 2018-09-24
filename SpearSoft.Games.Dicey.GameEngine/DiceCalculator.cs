@@ -27,12 +27,16 @@ namespace SpearSoft.Games.Dicey.GameEngine
         /// <param name="scoreFormula"></param>
         /// <param name="minimumCount"></param>
         /// <param name="valueToCheck"></param>
-        public DiceCalculator(List<Func<byte[], bool>> rules, Func<byte[], int> scoreFormula, byte minimumCount, byte valueToCheck)
+        /// <param name="name"></param>
+        /// <param name="scoreDescription"></param>
+        public DiceCalculator(List<Func<byte[], bool>> rules, Func<byte[], int> scoreFormula, byte minimumCount, byte valueToCheck, string name, string scoreDescription)
         {
             _rules = rules;
             _scoreFormula = scoreFormula;
             _minimumCount = minimumCount;
             _valueToCheck = valueToCheck;
+            Name = name;
+            ScoreDescription = scoreDescription;
         }
 
         //public DiceCalculator()
@@ -44,10 +48,10 @@ namespace SpearSoft.Games.Dicey.GameEngine
         //    _rules.Add(dice => dice.Count(d => d.Value==_valueToCheck)==_minimumCount);
         //}
 
-        public string Name { get; set; }
-        public string ScoreDescription { get; set; }
+        public string Name { get; }
+        public string ScoreDescription { get; }
 
-        public DiceCalculationResult Validate(byte[] diceValues)
+        public DiceCalculationResult Calculate(byte[] diceValues)
         {
             var isValid = true;
             int score = _scoreFormula.Invoke(diceValues);
