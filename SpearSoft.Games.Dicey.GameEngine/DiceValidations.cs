@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace SpearSoft.Games.Dicey.GameEngine
 {
-    public static class DiceValidations
+    public class DiceValidations
     {
         public static Func<byte[], bool> DiceMustContain(byte valueToCheck)
         {
@@ -36,8 +36,8 @@ namespace SpearSoft.Games.Dicey.GameEngine
                            || dice.Count(d => d == 2) >= numOfAKind
                            || dice.Count(d => d == 3) >= numOfAKind
                            || dice.Count(d => d == 4) >= numOfAKind
-                           || dice.Count(d => d == 4) >= numOfAKind
-                           || dice.Count(d => d == 5) >= numOfAKind;
+                           || dice.Count(d => d == 5) >= numOfAKind
+                           || dice.Count(d => d == 6) >= numOfAKind;
         }
         public static Func<byte[], bool> DiceIsFullHouse()
         {
@@ -47,15 +47,15 @@ namespace SpearSoft.Games.Dicey.GameEngine
                            || dice.Count(d => d == 2) == threeOfAKind
                            || dice.Count(d => d == 3) == threeOfAKind
                            || dice.Count(d => d == 4) == threeOfAKind
-                           || dice.Count(d => d == 4) == threeOfAKind
-                           || dice.Count(d => d == 5) == threeOfAKind)
+                           || dice.Count(d => d == 5) == threeOfAKind
+                           || dice.Count(d => d == 6) == threeOfAKind)
                            &&
                            (dice.Count(d => d == 1) == twoOfAKind
                            || dice.Count(d => d == 2) == twoOfAKind
                            || dice.Count(d => d == 3) == twoOfAKind
                            || dice.Count(d => d == 4) == twoOfAKind
-                           || dice.Count(d => d == 4) == twoOfAKind
-                           || dice.Count(d => d == 5) == twoOfAKind);
+                           || dice.Count(d => d == 5) == twoOfAKind
+                           || dice.Count(d => d == 6) == twoOfAKind);
         }
 
         public static Func<byte[], bool> DiceIsSmallStraight()

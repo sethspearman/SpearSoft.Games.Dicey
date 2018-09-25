@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace SpearSoft.Games.Dicey.GameEngine.Tests
@@ -28,7 +29,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             rules.Add(DiceValidations.DiceMustContain(valueToCheck));
             rules.Add(DiceValidations.DiceMustHaveCountOfACertainValue(valueToCheck, minimumCount));
 
-            var calculator = new DiceCalculator(rules, scoreFormula, valueToCheck, minimumCount, "Threes",
+            var calculator = new DiceCalculator(rules, scoreFormula, "Threes",
                 "The sum of the dice with the number 3");
 
             //act
@@ -51,8 +52,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             rules.Add(DiceValidations.DiceAlwaysValid());
 
-            var calculator = new DiceCalculator(rules, scoreFormula, valueToCheck, 0, "Aces",
-                "The sum of the dice with the number 1");
+            var calculator = new DiceCalculator(rules, scoreFormula, "Aces", "The sum of the dice with the number 1");
 
             //act
             var results = calculator.Calculate(bytes);
@@ -77,8 +77,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             rules.Add(DiceValidations.DiceAlwaysValid());
 
-            var calculator = new DiceCalculator(rules, scoreFormula, valueToCheck, 0, "Aces",
-                "The sum of the dice with the number 1");
+            var calculator = new DiceCalculator(rules, scoreFormula, "Two", "The sum of the dice with the number 2");
 
             //act
             var results = calculator.Calculate(bytes);
@@ -103,8 +102,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             rules.Add(DiceValidations.DiceAlwaysValid());
 
-            var calculator = new DiceCalculator(rules, scoreFormula, valueToCheck, 0, "Aces",
-                "The sum of the dice with the number 1");
+            var calculator = new DiceCalculator(rules, scoreFormula, "Threes", "The sum of the dice with the number 3");
 
             //act
             var results = calculator.Calculate(bytes);
@@ -129,8 +127,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             rules.Add(DiceValidations.DiceAlwaysValid());
 
-            var calculator = new DiceCalculator(rules, scoreFormula, valueToCheck, 0, "Aces",
-                "The sum of the dice with the number 1");
+            var calculator = new DiceCalculator(rules, scoreFormula, "Fours", "The sum of the dice with the number 4");
 
             //act
             var results = calculator.Calculate(bytes);
@@ -155,8 +152,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             rules.Add(DiceValidations.DiceAlwaysValid());
 
-            var calculator = new DiceCalculator(rules, scoreFormula, valueToCheck, 0, "Aces",
-                "The sum of the dice with the number 1");
+            var calculator = new DiceCalculator(rules, scoreFormula, "Fives", "The sum of the dice with the number 5");
 
             //act
             var results = calculator.Calculate(bytes);
@@ -181,8 +177,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             rules.Add(DiceValidations.DiceAlwaysValid());
 
-            var calculator = new DiceCalculator(rules, scoreFormula, valueToCheck, 0, "Aces",
-                "The sum of the dice with the number 1");
+            var calculator = new DiceCalculator(rules, scoreFormula, "Sixes", "The sum of the dice with the number 6");
 
             //act
             var results = calculator.Calculate(bytes);
@@ -192,6 +187,186 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             Assert.IsTrue(results.Score == expected,
                 $"Score was expected to be {expected} but was {results.Score} instead.");
         }
+
+        [TestCase(new byte[] { 4, 4, 1, 2, 4 },15, true)]  //valid, add dice
+        [TestCase(new byte[] { 4, 4, 1, 2, 1 },0, false)]  //not not three of a kind, score 0
+        [TestCase(new byte[] { 4, 4, 4, 2, 4 },18, true)]  //valid, add dice
+        public void DiceCalculator_ThreeOfAKind_IfValidReturnsSumOfAllDice(byte[] bytes, int expected, bool isValid)
+        {
+            List<DiceCalculator> diceCalculators = Setup();
+
+            var calculator = diceCalculators.First(dc => dc.Name == "Three Of A Kind");
+
+            var results = calculator.Calculate(bytes);
+
+            Assert.IsTrue(results.IsValid == isValid, $"Results should have been {isValid} but where {!isValid}.");
+            Assert.IsTrue(results.Score == expected,
+                $"Score was expected to be {expected} but was {results.Score} instead.");
+        }
+
+        [TestCase(new byte[] { 4, 4, 1, 2, 4 }, 0, false)]  //not not four of a kind, score 0
+        [TestCase(new byte[] { 4, 4, 1, 2, 1 }, 0, false)]  //not not four of a kind, score 0
+        [TestCase(new byte[] { 4, 4, 4, 2, 4 }, 18, true)]  //valid, add dice
+        public void DiceCalculator_FourOfAKind_IfValidReturnsSumOfAllDice(byte[] bytes, int expected, bool isValid)
+        {
+            List<DiceCalculator> diceCalculators = Setup();
+
+            var calculator = diceCalculators.First(dc => dc.Name == "Four Of A Kind");
+
+            var results = calculator.Calculate(bytes);
+
+            Assert.IsTrue(results.IsValid == isValid, $"Results should have been {isValid} but where {!isValid}.");
+            Assert.IsTrue(results.Score == expected,
+                $"Score was expected to be {expected} but was {results.Score} instead.");
+        }
+
+        [TestCase(new byte[] { 4, 4, 1, 2, 4 }, 0, false)]  //not full house, score 0
+        [TestCase(new byte[] { 4, 4, 1, 4, 1 }, 25, true)]  //full house, score 25
+        [TestCase(new byte[] { 4, 4, 4, 2, 4 }, 0, false)]  //not full house, score 0
+        public void DiceCalculator_FullHouse_IfValidReturns25(byte[] bytes, int expected, bool isValid)
+        {
+            List<DiceCalculator> diceCalculators = Setup();
+
+            var calculator = diceCalculators.First(dc => dc.Name == "Full House");
+
+            var results = calculator.Calculate(bytes);
+
+            Assert.IsTrue(results.IsValid == isValid, $"Results should have been {isValid} but where {!isValid}.");
+            Assert.IsTrue(results.Score == expected,
+                $"Score was expected to be {expected} but was {results.Score} instead.");
+        }
+
+        [TestCase(new byte[] { 1, 2, 3, 4, 5 }, 30, true)]  //a large straight is also a small straight
+        [TestCase(new byte[] { 1, 2, 3, 4, 5 }, 30, true)]  //a large straight is also a small straight but should still show score 30
+        [TestCase(new byte[] { 5, 2, 4, 3, 5 }, 30, true)]  //order doesn't matter, score 30
+        [TestCase(new byte[] { 1, 2, 3, 1, 2 }, 0, false)]  //not a straight, score 0
+        [TestCase(new byte[] { 4, 4, 4, 2, 4 }, 0, false)]  //valid, add dice
+        public void DiceCalculator_SmallStraight_IfValidReturns30(byte[] bytes, int expected, bool isValid)
+        {
+            List<DiceCalculator> diceCalculators = Setup();
+
+            var calculator = diceCalculators.First(dc => dc.Name == "Small Straight");
+
+            var results = calculator.Calculate(bytes);
+
+            Assert.IsTrue(results.IsValid == isValid, $"Results should have been {isValid} but where {!isValid}.");
+            Assert.IsTrue(results.Score == expected,
+                $"Score was expected to be {expected} but was {results.Score} instead.");
+        }
+
+        [TestCase(new byte[] { 1, 2, 3, 4, 4 }, 0, false)]  //a small straight is not a large straight
+        [TestCase(new byte[] { 1, 2, 3, 4, 5 }, 40, true)]  //a large straight score 40
+        [TestCase(new byte[] { 5, 2, 4, 3, 1 }, 40, true)]  //order doesn't matter, score 40
+        [TestCase(new byte[] { 1, 2, 3, 1, 2 }, 0, false)]  //not a straight, score 0
+        [TestCase(new byte[] { 4, 4, 4, 2, 4 }, 0, false)]  //valid, add dice
+        public void DiceCalculator_LargeStraight_IfValidReturns40(byte[] bytes, int expected, bool isValid)
+        {
+            List<DiceCalculator> diceCalculators = Setup();
+
+            var calculator = diceCalculators.First(dc => dc.Name == "Large Straight");
+
+            var results = calculator.Calculate(bytes);
+
+            Assert.IsTrue(results.IsValid == isValid, $"Results should have been {isValid} but where {!isValid}.");
+            Assert.IsTrue(results.Score == expected,
+                $"Score was expected to be {expected} but was {results.Score} instead.");
+        }
+
+        [TestCase(new byte[] { 4, 4, 4, 4, 4 }, 50, true)]  //a small straight is not a large straight
+        [TestCase(new byte[] { 1, 2, 3, 4, 5 }, 0, false)]  //a straight is not a yahtzee score 0
+        [TestCase(new byte[] { 4, 4, 4, 2, 4 }, 0, false)]  //almost but no banana , score 0
+        public void DiceCalculator_Yahtzee_IfValidReturns50(byte[] bytes, int expected, bool isValid)
+        {
+            List<DiceCalculator> diceCalculators = Setup();
+
+            var calculator = diceCalculators.First(dc => dc.Name == "Yahtzee");
+
+            var results = calculator.Calculate(bytes);
+
+            Assert.IsTrue(results.IsValid == isValid, $"Results should have been {isValid} but where {!isValid}.");
+            Assert.IsTrue(results.Score == expected,
+                $"Score was expected to be {expected} but was {results.Score} instead.");
+        }
+
+        [TestCase(new byte[] { 4, 4, 4, 4, 4 }, 100, true)]  //a small straight is not a large straight
+        [TestCase(new byte[] { 1, 2, 3, 4, 5 }, 0, false)]  //a straight is not a yahtzee score 0
+        [TestCase(new byte[] { 4, 4, 4, 2, 4 }, 0, false)]  //almost but no banana , score 0
+        public void DiceCalculator_YahtzeeBonus_IfValidReturns100(byte[] bytes, int expected, bool isValid)
+        {
+            List<DiceCalculator> diceCalculators = Setup();
+
+            var calculator = diceCalculators.First(dc => dc.Name == "Yahtzee Bonus");
+
+            var results = calculator.Calculate(bytes);
+
+            Assert.IsTrue(results.IsValid == isValid, $"Results should have been {isValid} but where {!isValid}.");
+            Assert.IsTrue(results.Score == expected,
+                $"Score was expected to be {expected} but was {results.Score} instead.");
+        }
+
+        private List<DiceCalculator> Setup()
+        {
+            var result = new List<DiceCalculator>();
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceAlwaysValid()},
+                DiceScoringFormulas.DiceSumOfSpecificNumber(1), 
+                "Aces", "The sum of the dice with the number 1"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceAlwaysValid()},
+                DiceScoringFormulas.DiceSumOfSpecificNumber(2), 
+                "Twos", "The sum of the dice with the number 2"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceAlwaysValid()},
+                DiceScoringFormulas.DiceSumOfSpecificNumber(3), 
+                "Threes", "The sum of the dice with the number 3"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceAlwaysValid()},
+                DiceScoringFormulas.DiceSumOfSpecificNumber(4), 
+                "Fours", "The sum of the dice with the number 4"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceAlwaysValid()},
+                DiceScoringFormulas.DiceSumOfSpecificNumber(5), 
+                "Fives", "The sum of the dice with the number 5"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceAlwaysValid()},
+                DiceScoringFormulas.DiceSumOfSpecificNumber(6), 
+                "Sixes", "The sum of the dice with the number 6"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceIsXofAKind(3)},
+                DiceScoringFormulas.DiceSumAllIfValid(DiceValidations.DiceIsXofAKind(3)), 
+                "Three Of A Kind", "Sum of all dice"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceIsXofAKind(4)},
+                DiceScoringFormulas.DiceSumAllIfValid(DiceValidations.DiceIsXofAKind(4)), 
+                "Four Of A Kind", "Sum of all dice"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceIsFullHouse()},
+                DiceScoringFormulas.DiceReturnSpecificValueIfValid(DiceValidations.DiceIsFullHouse(), 25), 
+                "Full House", "25"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceIsSmallStraight()},
+                DiceScoringFormulas.DiceReturnSpecificValueIfValid(DiceValidations.DiceIsSmallStraight(), 30),
+                "Small Straight", "30"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceIsLargeStraight()},
+                DiceScoringFormulas.DiceReturnSpecificValueIfValid(DiceValidations.DiceIsLargeStraight(), 40),
+                "Large Straight", "40"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceIsXofAKind(5)},
+                DiceScoringFormulas.DiceReturnSpecificValueIfValid(DiceValidations.DiceIsXofAKind(5), 50), 
+                "Yahtzee", "50"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceAlwaysValid()},
+                DiceScoringFormulas.DiceSumAll(), 
+                "Chance", "Sum of all dice"));
+
+            result.Add(new DiceCalculator(new List<Func<byte[], bool>>() {DiceValidations.DiceIsXofAKind(5)},
+                DiceScoringFormulas.DiceBonusYahtzeeIfValid(DiceValidations.DiceIsXofAKind(5)), 
+                "Yahtzee Bonus", "100"));
+
+            return result;
+        } 
+
 
     }
 }
