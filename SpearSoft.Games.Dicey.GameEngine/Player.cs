@@ -11,6 +11,6 @@ namespace SpearSoft.Games.Dicey.GameEngine
         internal string PlayerName { get; set; }
         internal Guid Id { get; set; }
 
-        internal GameCard GameCard { get; set; }
+        internal GameCard GameCard { get; set; } = new GameCard();
     }
 }
