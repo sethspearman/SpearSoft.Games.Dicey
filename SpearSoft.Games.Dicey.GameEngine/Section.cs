@@ -1,6 +1,6 @@
 ﻿namespace SpearSoft.Games.Dicey.GameEngine
 {
-    internal enum Section
+    public enum Section
     {
         Upper,
         Lower

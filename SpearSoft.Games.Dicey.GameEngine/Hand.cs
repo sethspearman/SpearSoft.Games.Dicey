@@ -3,20 +3,15 @@ using System.Collections.Generic;
 
 namespace SpearSoft.Games.Dicey.GameEngine
 {
-    internal class Hand
+    public class Hand
     {
-        public Hand(string name, string formulaDescription, Func<byte[], int> scoreFormula, List<Func<byte[], bool>> scoreCalculationRules, Section section, bool isScoreable, int score, bool isSelected, bool isApplied, bool isValid)
+        public Hand(string name, string formulaDescription, Func<byte[], int> scoreFormula, List<Func<byte[], bool>> scoreCalculationRules, Section section)
         {
             Name = name;
             FormulaDescription = formulaDescription;
             ScoreFormula = scoreFormula;
             ScoreCalculationRules = scoreCalculationRules;
             Section = section;
-            IsScoreable = isScoreable;
-            Score = score;
-            IsSelected = isSelected;
-            IsApplied = isApplied;
-            IsValid = isValid;
         }
         public string Name { get; }
         
@@ -30,9 +25,9 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public bool IsScoreable { get; private set; }
 
-        public bool IsValid { get; private set; }
+        public bool IsValid { get; private set; } 
 
-        public int Score { private set; get; }
+        public int Score { private set; get; } 
 
         public bool IsSelected { get; set; }
 
