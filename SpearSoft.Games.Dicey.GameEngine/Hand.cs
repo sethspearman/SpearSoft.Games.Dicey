@@ -44,7 +44,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
         {
             _dice = dice;
 
-            var calcResult = Calculate();
+            DiceCalculationResult calcResult = Calculate();
             Score = calcResult.Score;
             IsScoreable = calcResult.Score > 0;
             IsValid = calcResult.IsValid;

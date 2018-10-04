@@ -7,7 +7,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
         public Game()
         {
             Players= new List<Player>();
-            Players.Add(new Player { PlayerName = "DEFAULT" });
+            Players.Add(new Player("DEFAULT"));
 
             //Players.Add(new Player());
         }
