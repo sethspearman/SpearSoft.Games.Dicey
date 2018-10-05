@@ -10,6 +10,12 @@ namespace SpearSoft.Games.Dicey.GameEngine
             Position = position;
         }
 
+        public Die(byte position, byte initialValue)
+        {
+            this.Value = initialValue;
+            Position = position;
+        }
+
         public byte Value { get; private set; }
         public bool Locked { get; set; }
         public byte Position { get; private set; }

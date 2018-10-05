@@ -21,13 +21,17 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             Globals.Game = new Game();
             Globals.Dice = new Dice();
 
-            SetDiceUI();
+            SetDiceUI(true);
         }
 
-        private void SetDiceUI()
+        private void SetDiceUI(bool skipRoll)
         {
             var dice = Globals.Dice;
-            dice.Roll();
+
+            if (!skipRoll)
+            {
+                dice.Roll();    
+            }
 
             btnDice1.Text = dice[0].Value.ToString();
             btnDice2.Text = dice[1].Value.ToString();
@@ -60,13 +64,11 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             lblYahtzee.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Yahtzee")?.Score.ToString();
             lblChance.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Chance")?.Score.ToString();
 
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            SetDiceUI();
+            SetDiceUI(false);
         }
 
         private void SetButtonImage(Button button)

@@ -11,7 +11,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
         {
             for (byte i = 1; i <= 5; i++)
             {
-                this.Add(new Die(i));
+                this.Add(new Die(i,0));
             }
 
         }
