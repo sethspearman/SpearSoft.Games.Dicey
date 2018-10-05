@@ -18,7 +18,7 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
         {
             InitializeComponent();
 
-            var game = new Game();
+            Globals.Game = new Game();
             Globals.Dice = new Dice();
 
             SetDiceUI();
@@ -34,6 +34,34 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             btnDice3.Text = dice[2].Value.ToString();
             btnDice4.Text = dice[3].Value.ToString();
             btnDice5.Text = dice[4].Value.ToString();
+
+            var player = Globals.Game.Players[0];
+            var gameCard = player.GameCard;
+
+            foreach (var hand in gameCard.Hands)
+            {
+                hand.SetDice(dice.ToByteArray());
+            }
+
+            //upper section
+            lblAces.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Aces")?.Score.ToString();
+            lblTwos.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Twos")?.Score.ToString();
+            lblThrees.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Threes")?.Score.ToString();
+            lblFours.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Fours")?.Score.ToString();
+            lblFives.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Fives")?.Score.ToString();
+            lblSixes.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Sixes")?.Score.ToString();
+
+            //lower section
+            lbl3OfAKind.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Three of a Kind")?.Score.ToString();
+            lbl4OfAKind.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Four of a Kind")?.Score.ToString();
+            lblFullHouse.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Full House")?.Score.ToString();
+            lblSmallStraight.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Small Straight")?.Score.ToString();
+            lblLargeStraight.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Large Straight")?.Score.ToString();
+            lblYahtzee.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Yahtzee")?.Score.ToString();
+            lblChance.Text = gameCard.Hands.SingleOrDefault(h => h.Name == "Chance")?.Score.ToString();
+
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)
