@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SpearSoft.Games.Dicey.GameEngine
 {
     public class Game
     {
         public Player CurrentPlayer { get; private set; }
-        public byte CurrentTurn { get; private set; }
+        public byte CurrentRound { get; private set; }
+        public byte MaxRollsPerRound { get; private set; }
 
         public Game()
         {
@@ -24,7 +26,13 @@ namespace SpearSoft.Games.Dicey.GameEngine
         {
             Players = players;
             CurrentPlayer = players[0];
-            CurrentTurn = 1;
+            CurrentRound = 1;
+            MaxRollsPerRound = 3;
+        }
+
+        public bool GameOver()
+        {
+            throw new NotImplementedException();
         }
 
         public List<Player> Players { get; set; }

@@ -15,5 +15,6 @@ namespace SpearSoft.Games.Dicey.GameEngine
         public Guid Id { get; private set; }
 
         public GameCard GameCard { get; set; } = new GameCard();
+
     }
 }
