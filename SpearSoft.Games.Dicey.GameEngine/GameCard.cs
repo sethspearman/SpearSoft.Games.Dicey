@@ -1,15 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SpearSoft.Games.Dicey.GameEngine
 {
     public class GameCard
     {
+        public event EventHandler<HandEventArgs> HandApplied;
+
+        public List<Hand> Hands = null;
+
+        public int Score { get; private set; }
+
+        public void SelectHand(Hand hand)
+        {
+            Hands.ToList().ForEach(h => h.IsSelected = false);
+
+            hand.IsSelected = false;
+        }
+
+        public void ApplyHand(Hand hand)
+        {
+            SelectHand(hand);
+
+            //do stuff to lock in the round and emit a score for this round.
+
+            //assumes that this is only set once for one hand.  no reset needed.
+            hand.IsApplied = true;
+        }
+
+        protected virtual void OnHandApplied(HandEventArgs e)
+        {
+            HandApplied?.Invoke(this, e);
+        }
+
 
         public GameCard()
         {
             Hands = new List<Hand>();
-
+            
             //upper hands initialization
             Hands.Add(InitUpperHand(1,"Aces","The sum of dice with the number 1"));
             Hands.Add(InitUpperHand(2,"Twos","The sum of dice with the number 2"));
@@ -76,7 +105,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
             return hand;
         }
 
-        private Hand InitUpperHand(byte valueToCheck,string name, string formulaDescription)
+        private static Hand InitUpperHand(byte valueToCheck,string name, string formulaDescription)
         {
             var scoreFormula = DiceScoringFormulas.DiceSumOfSpecificNumber(valueToCheck);
             var rules = new List<Func<byte[], bool>>();
@@ -85,13 +114,13 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
             return hand;
         }
+    }
 
-
-
-        public List<Hand> Hands = null;
-
-
-
-        public int Score { get; set; }
+    public class HandEventArgs:EventArgs
+    {
+        public HandEventArgs(Hand hand)
+        {
+            
+        }
     }
 }

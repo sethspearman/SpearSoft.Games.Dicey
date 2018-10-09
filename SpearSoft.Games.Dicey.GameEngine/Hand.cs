@@ -5,6 +5,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
 {
     public class Hand
     {
+
         public Hand(string name, string formulaDescription, Func<byte[], int> scoreFormula, List<Func<byte[], bool>> scoreCalculationRules, Section section)
         {
             Name = name;
