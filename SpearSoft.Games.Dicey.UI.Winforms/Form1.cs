@@ -14,7 +14,20 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             Globals.Game = new Game();
             Globals.Dice = new Dice();
 
+            Globals.Game.IncrementRound += Game_IncrementRound;
+            Globals.Game.NextPlayer += Game_NextPlayer;
+
             SetDiceUI(true);
+        }
+
+        private void Game_NextPlayer(object sender, NextPlayerEventArgs e)
+        {
+            //Globals.Game.CurrentPlayer = e.Player;
+        }
+
+        private void Game_IncrementRound(object sender, NextRoundEventArgs e)
+        {
+            //Globals.CurrentRound = e.NewRound;
         }
 
         private void SetDiceUI(bool skipRoll)
@@ -60,6 +73,8 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             lblLargeStraight.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.LargeStraight)?.Score.ToString();
             lblYahtzee.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee)?.Score.ToString();
             lblChance.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Chance)?.Score.ToString();
+
+            lblScoreValue.Text = Globals.Game.CurrentPlayer.GameCard.PotentialScore.ToString();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -67,10 +82,18 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             SetDiceUI(false);
         }
 
-        private void SetButtonImage(Button button)
+        private void SetDiceButtonImage(Button button)
         {
             LockDie(button);
 
+            if (button.ImageIndex == 0)
+                button.ImageIndex = -1;
+            else
+                button.ImageIndex = 0;
+        }
+
+        private void SetHandButtonImage(Button button)
+        {
             if (button.ImageIndex == 0)
                 button.ImageIndex = -1;
             else
@@ -91,27 +114,48 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
 
         private void btnDice1_Click(object sender, EventArgs e)
         {
-            if (sender is Button button) SetButtonImage(button);
+            if (sender is Button button) SetDiceButtonImage(button);
         }
 
         private void btnDice2_Click(object sender, EventArgs e)
         {
-            if (sender is Button button) SetButtonImage(button);
+            if (sender is Button button) SetDiceButtonImage(button);
         }
 
         private void btnDice3_Click(object sender, EventArgs e)
         {
-            if (sender is Button button) SetButtonImage(button);
+            if (sender is Button button) SetDiceButtonImage(button);
         }
 
         private void btnDice4_Click(object sender, EventArgs e)
         {
-            if (sender is Button button) SetButtonImage(button);
+            if (sender is Button button) SetDiceButtonImage(button);
         }
 
         private void btnDice5_Click(object sender, EventArgs e)
         {
-            if (sender is Button button) SetButtonImage(button);
+            if (sender is Button button) SetDiceButtonImage(button);
+        }
+
+        private void btnAces_Click(object sender, EventArgs e)
+        {
+            SelectHand(GameCard.Aces);
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button ctrl && ctrl.Tag.ToString().Contains("IsHand"))
+                {
+                    var tag = ctrl.Tag.ToString();
+                    
+                }
+            }
+
+        }
+
+        private static void SelectHand(string handName)
+        {
+            Globals.Game.CurrentPlayer.GameCard.SelectHand(
+                Globals.Game.CurrentPlayer.GameCard.Hands.First(h => h.Name == handName));
         }
     }
 }

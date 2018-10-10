@@ -39,6 +39,10 @@
             this.btnDice1 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBoxUpperSection = new System.Windows.Forms.GroupBox();
+            this.lblUpperBonusValue = new System.Windows.Forms.Label();
+            this.lblUpperBonusCaption = new System.Windows.Forms.Label();
+            this.lblUpperTotalValue = new System.Windows.Forms.Label();
+            this.lblUpperTotalCaption = new System.Windows.Forms.Label();
             this.lblTwos = new System.Windows.Forms.Label();
             this.lblThrees = new System.Windows.Forms.Label();
             this.lblFours = new System.Windows.Forms.Label();
@@ -52,6 +56,10 @@
             this.btnTwos = new System.Windows.Forms.Button();
             this.btnAces = new System.Windows.Forms.Button();
             this.groupBoxLowerSection = new System.Windows.Forms.GroupBox();
+            this.lblLowerBonusValue = new System.Windows.Forms.Label();
+            this.lblLowerBonusCaption = new System.Windows.Forms.Label();
+            this.lblLowerTotalValue = new System.Windows.Forms.Label();
+            this.lblLowerTotalCaption = new System.Windows.Forms.Label();
             this.lblChance = new System.Windows.Forms.Label();
             this.lbl4OfAKind = new System.Windows.Forms.Label();
             this.lblFullHouse = new System.Windows.Forms.Label();
@@ -66,14 +74,6 @@
             this.btnFullHouse = new System.Windows.Forms.Button();
             this.btn4OfAKind = new System.Windows.Forms.Button();
             this.btn3OfAKind = new System.Windows.Forms.Button();
-            this.lblUpperTotalCaption = new System.Windows.Forms.Label();
-            this.lblUpperTotalValue = new System.Windows.Forms.Label();
-            this.lblUpperBonusValue = new System.Windows.Forms.Label();
-            this.lblUpperBonusCaption = new System.Windows.Forms.Label();
-            this.lblLowerBonusValue = new System.Windows.Forms.Label();
-            this.lblLowerBonusCaption = new System.Windows.Forms.Label();
-            this.lblLowerTotalValue = new System.Windows.Forms.Label();
-            this.lblLowerTotalCaption = new System.Windows.Forms.Label();
             this.lblScoreValue = new System.Windows.Forms.Label();
             this.lblScoreCaption = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -89,7 +89,7 @@
             this.panel1.Controls.Add(this.btnDice2);
             this.panel1.Controls.Add(this.btnDice1);
             this.panel1.Location = new System.Drawing.Point(16, 15);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(429, 92);
             this.panel1.TabIndex = 0;
@@ -99,7 +99,7 @@
             this.btnDice5.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnDice5.ImageList = this.imageList1;
             this.btnDice5.Location = new System.Drawing.Point(346, 11);
-            this.btnDice5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDice5.Margin = new System.Windows.Forms.Padding(4);
             this.btnDice5.Name = "btnDice5";
             this.btnDice5.Size = new System.Drawing.Size(68, 68);
             this.btnDice5.TabIndex = 4;
@@ -119,7 +119,7 @@
             this.btnDice4.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnDice4.ImageList = this.imageList1;
             this.btnDice4.Location = new System.Drawing.Point(262, 11);
-            this.btnDice4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDice4.Margin = new System.Windows.Forms.Padding(4);
             this.btnDice4.Name = "btnDice4";
             this.btnDice4.Size = new System.Drawing.Size(68, 68);
             this.btnDice4.TabIndex = 3;
@@ -133,7 +133,7 @@
             this.btnDice3.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnDice3.ImageList = this.imageList1;
             this.btnDice3.Location = new System.Drawing.Point(178, 11);
-            this.btnDice3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDice3.Margin = new System.Windows.Forms.Padding(4);
             this.btnDice3.Name = "btnDice3";
             this.btnDice3.Size = new System.Drawing.Size(68, 68);
             this.btnDice3.TabIndex = 2;
@@ -147,7 +147,7 @@
             this.btnDice2.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnDice2.ImageList = this.imageList1;
             this.btnDice2.Location = new System.Drawing.Point(94, 11);
-            this.btnDice2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDice2.Margin = new System.Windows.Forms.Padding(4);
             this.btnDice2.Name = "btnDice2";
             this.btnDice2.Size = new System.Drawing.Size(68, 68);
             this.btnDice2.TabIndex = 1;
@@ -161,7 +161,7 @@
             this.btnDice1.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.btnDice1.ImageList = this.imageList1;
             this.btnDice1.Location = new System.Drawing.Point(10, 11);
-            this.btnDice1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDice1.Margin = new System.Windows.Forms.Padding(4);
             this.btnDice1.Name = "btnDice1";
             this.btnDice1.Size = new System.Drawing.Size(68, 68);
             this.btnDice1.TabIndex = 0;
@@ -174,7 +174,7 @@
             // 
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.Location = new System.Drawing.Point(184, 541);
-            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 28);
             this.button6.TabIndex = 1;
@@ -201,13 +201,53 @@
             this.groupBoxUpperSection.Controls.Add(this.btnTwos);
             this.groupBoxUpperSection.Controls.Add(this.btnAces);
             this.groupBoxUpperSection.Location = new System.Drawing.Point(20, 151);
-            this.groupBoxUpperSection.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxUpperSection.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxUpperSection.Name = "groupBoxUpperSection";
-            this.groupBoxUpperSection.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxUpperSection.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxUpperSection.Size = new System.Drawing.Size(208, 369);
             this.groupBoxUpperSection.TabIndex = 2;
             this.groupBoxUpperSection.TabStop = false;
             this.groupBoxUpperSection.Text = "Upper Section";
+            // 
+            // lblUpperBonusValue
+            // 
+            this.lblUpperBonusValue.AutoSize = true;
+            this.lblUpperBonusValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpperBonusValue.Location = new System.Drawing.Point(117, 321);
+            this.lblUpperBonusValue.Name = "lblUpperBonusValue";
+            this.lblUpperBonusValue.Size = new System.Drawing.Size(17, 18);
+            this.lblUpperBonusValue.TabIndex = 15;
+            this.lblUpperBonusValue.Text = "0";
+            // 
+            // lblUpperBonusCaption
+            // 
+            this.lblUpperBonusCaption.AutoSize = true;
+            this.lblUpperBonusCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpperBonusCaption.Location = new System.Drawing.Point(20, 322);
+            this.lblUpperBonusCaption.Name = "lblUpperBonusCaption";
+            this.lblUpperBonusCaption.Size = new System.Drawing.Size(61, 18);
+            this.lblUpperBonusCaption.TabIndex = 14;
+            this.lblUpperBonusCaption.Text = "Bonus:";
+            // 
+            // lblUpperTotalValue
+            // 
+            this.lblUpperTotalValue.AutoSize = true;
+            this.lblUpperTotalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpperTotalValue.Location = new System.Drawing.Point(117, 293);
+            this.lblUpperTotalValue.Name = "lblUpperTotalValue";
+            this.lblUpperTotalValue.Size = new System.Drawing.Size(17, 18);
+            this.lblUpperTotalValue.TabIndex = 13;
+            this.lblUpperTotalValue.Text = "0";
+            // 
+            // lblUpperTotalCaption
+            // 
+            this.lblUpperTotalCaption.AutoSize = true;
+            this.lblUpperTotalCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpperTotalCaption.Location = new System.Drawing.Point(20, 294);
+            this.lblUpperTotalCaption.Name = "lblUpperTotalCaption";
+            this.lblUpperTotalCaption.Size = new System.Drawing.Size(61, 18);
+            this.lblUpperTotalCaption.TabIndex = 12;
+            this.lblUpperTotalCaption.Text = "Total:  ";
             // 
             // lblTwos
             // 
@@ -266,62 +306,69 @@
             // btnSixes
             // 
             this.btnSixes.Location = new System.Drawing.Point(9, 203);
-            this.btnSixes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSixes.Margin = new System.Windows.Forms.Padding(4);
             this.btnSixes.Name = "btnSixes";
             this.btnSixes.Size = new System.Drawing.Size(100, 28);
             this.btnSixes.TabIndex = 5;
+            this.btnSixes.Tag = "IsHand;Sixes";
             this.btnSixes.Text = "Sixes";
             this.btnSixes.UseVisualStyleBackColor = true;
             // 
             // btnFives
             // 
             this.btnFives.Location = new System.Drawing.Point(9, 167);
-            this.btnFives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFives.Margin = new System.Windows.Forms.Padding(4);
             this.btnFives.Name = "btnFives";
             this.btnFives.Size = new System.Drawing.Size(100, 28);
             this.btnFives.TabIndex = 4;
+            this.btnFives.Tag = "IsHand;Fives";
             this.btnFives.Text = "Fives";
             this.btnFives.UseVisualStyleBackColor = true;
             // 
             // btnFours
             // 
             this.btnFours.Location = new System.Drawing.Point(9, 132);
-            this.btnFours.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFours.Margin = new System.Windows.Forms.Padding(4);
             this.btnFours.Name = "btnFours";
             this.btnFours.Size = new System.Drawing.Size(100, 28);
             this.btnFours.TabIndex = 3;
+            this.btnFours.Tag = "IsHand;Fours";
             this.btnFours.Text = "Fours";
             this.btnFours.UseVisualStyleBackColor = true;
             // 
             // btnThrees
             // 
             this.btnThrees.Location = new System.Drawing.Point(9, 96);
-            this.btnThrees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnThrees.Margin = new System.Windows.Forms.Padding(4);
             this.btnThrees.Name = "btnThrees";
             this.btnThrees.Size = new System.Drawing.Size(100, 28);
             this.btnThrees.TabIndex = 2;
+            this.btnThrees.Tag = "IsHand;Threes";
             this.btnThrees.Text = "Threes";
             this.btnThrees.UseVisualStyleBackColor = true;
             // 
             // btnTwos
             // 
             this.btnTwos.Location = new System.Drawing.Point(9, 60);
-            this.btnTwos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTwos.Margin = new System.Windows.Forms.Padding(4);
             this.btnTwos.Name = "btnTwos";
             this.btnTwos.Size = new System.Drawing.Size(100, 28);
             this.btnTwos.TabIndex = 1;
+            this.btnTwos.Tag = "IsHand;Twos";
             this.btnTwos.Text = "Twos";
             this.btnTwos.UseVisualStyleBackColor = true;
             // 
             // btnAces
             // 
             this.btnAces.Location = new System.Drawing.Point(9, 25);
-            this.btnAces.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAces.Margin = new System.Windows.Forms.Padding(4);
             this.btnAces.Name = "btnAces";
             this.btnAces.Size = new System.Drawing.Size(100, 28);
             this.btnAces.TabIndex = 0;
+            this.btnAces.Tag = "IsHand;Aces";
             this.btnAces.Text = "Aces";
             this.btnAces.UseVisualStyleBackColor = true;
+            this.btnAces.Click += new System.EventHandler(this.btnAces_Click);
             // 
             // groupBoxLowerSection
             // 
@@ -344,13 +391,53 @@
             this.groupBoxLowerSection.Controls.Add(this.btn4OfAKind);
             this.groupBoxLowerSection.Controls.Add(this.btn3OfAKind);
             this.groupBoxLowerSection.Location = new System.Drawing.Point(240, 153);
-            this.groupBoxLowerSection.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxLowerSection.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxLowerSection.Name = "groupBoxLowerSection";
-            this.groupBoxLowerSection.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxLowerSection.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxLowerSection.Size = new System.Drawing.Size(232, 367);
             this.groupBoxLowerSection.TabIndex = 3;
             this.groupBoxLowerSection.TabStop = false;
             this.groupBoxLowerSection.Text = "Lower Section";
+            // 
+            // lblLowerBonusValue
+            // 
+            this.lblLowerBonusValue.AutoSize = true;
+            this.lblLowerBonusValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowerBonusValue.Location = new System.Drawing.Point(132, 318);
+            this.lblLowerBonusValue.Name = "lblLowerBonusValue";
+            this.lblLowerBonusValue.Size = new System.Drawing.Size(17, 18);
+            this.lblLowerBonusValue.TabIndex = 24;
+            this.lblLowerBonusValue.Text = "0";
+            // 
+            // lblLowerBonusCaption
+            // 
+            this.lblLowerBonusCaption.AutoSize = true;
+            this.lblLowerBonusCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowerBonusCaption.Location = new System.Drawing.Point(35, 319);
+            this.lblLowerBonusCaption.Name = "lblLowerBonusCaption";
+            this.lblLowerBonusCaption.Size = new System.Drawing.Size(61, 18);
+            this.lblLowerBonusCaption.TabIndex = 23;
+            this.lblLowerBonusCaption.Text = "Bonus:";
+            // 
+            // lblLowerTotalValue
+            // 
+            this.lblLowerTotalValue.AutoSize = true;
+            this.lblLowerTotalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowerTotalValue.Location = new System.Drawing.Point(132, 290);
+            this.lblLowerTotalValue.Name = "lblLowerTotalValue";
+            this.lblLowerTotalValue.Size = new System.Drawing.Size(17, 18);
+            this.lblLowerTotalValue.TabIndex = 22;
+            this.lblLowerTotalValue.Text = "0";
+            // 
+            // lblLowerTotalCaption
+            // 
+            this.lblLowerTotalCaption.AutoSize = true;
+            this.lblLowerTotalCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowerTotalCaption.Location = new System.Drawing.Point(35, 291);
+            this.lblLowerTotalCaption.Name = "lblLowerTotalCaption";
+            this.lblLowerTotalCaption.Size = new System.Drawing.Size(51, 18);
+            this.lblLowerTotalCaption.TabIndex = 21;
+            this.lblLowerTotalCaption.Text = "Total:";
             // 
             // lblChance
             // 
@@ -418,152 +505,79 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(8, 239);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 28);
             this.button1.TabIndex = 12;
+            this.button1.Tag = "IsHand;Chance";
             this.button1.Text = "Chance";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // btnYahtzee
             // 
             this.btnYahtzee.Location = new System.Drawing.Point(8, 203);
-            this.btnYahtzee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnYahtzee.Margin = new System.Windows.Forms.Padding(4);
             this.btnYahtzee.Name = "btnYahtzee";
             this.btnYahtzee.Size = new System.Drawing.Size(116, 28);
             this.btnYahtzee.TabIndex = 11;
+            this.btnYahtzee.Tag = "IsHand;Yahtzee";
             this.btnYahtzee.Text = "Yahtzee";
             this.btnYahtzee.UseVisualStyleBackColor = true;
             // 
             // btnLargeStraight
             // 
             this.btnLargeStraight.Location = new System.Drawing.Point(8, 167);
-            this.btnLargeStraight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLargeStraight.Margin = new System.Windows.Forms.Padding(4);
             this.btnLargeStraight.Name = "btnLargeStraight";
             this.btnLargeStraight.Size = new System.Drawing.Size(116, 28);
             this.btnLargeStraight.TabIndex = 10;
+            this.btnLargeStraight.Tag = "IsHand;Large Straight";
             this.btnLargeStraight.Text = "Large Straight";
             this.btnLargeStraight.UseVisualStyleBackColor = true;
             // 
             // btnSmallStraight
             // 
             this.btnSmallStraight.Location = new System.Drawing.Point(8, 132);
-            this.btnSmallStraight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSmallStraight.Margin = new System.Windows.Forms.Padding(4);
             this.btnSmallStraight.Name = "btnSmallStraight";
             this.btnSmallStraight.Size = new System.Drawing.Size(116, 28);
             this.btnSmallStraight.TabIndex = 9;
+            this.btnSmallStraight.Tag = "IsHand;Small Straight";
             this.btnSmallStraight.Text = "Small Straight";
             this.btnSmallStraight.UseVisualStyleBackColor = true;
             // 
             // btnFullHouse
             // 
             this.btnFullHouse.Location = new System.Drawing.Point(8, 96);
-            this.btnFullHouse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFullHouse.Margin = new System.Windows.Forms.Padding(4);
             this.btnFullHouse.Name = "btnFullHouse";
             this.btnFullHouse.Size = new System.Drawing.Size(116, 28);
             this.btnFullHouse.TabIndex = 8;
+            this.btnFullHouse.Tag = "IsHand;Full House";
             this.btnFullHouse.Text = "Full House";
             this.btnFullHouse.UseVisualStyleBackColor = true;
             // 
             // btn4OfAKind
             // 
             this.btn4OfAKind.Location = new System.Drawing.Point(8, 60);
-            this.btn4OfAKind.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn4OfAKind.Margin = new System.Windows.Forms.Padding(4);
             this.btn4OfAKind.Name = "btn4OfAKind";
             this.btn4OfAKind.Size = new System.Drawing.Size(116, 28);
             this.btn4OfAKind.TabIndex = 7;
+            this.btn4OfAKind.Tag = "IsHand;4 of a kind";
             this.btn4OfAKind.Text = "4 of a kind";
             this.btn4OfAKind.UseVisualStyleBackColor = true;
             // 
             // btn3OfAKind
             // 
             this.btn3OfAKind.Location = new System.Drawing.Point(8, 25);
-            this.btn3OfAKind.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn3OfAKind.Margin = new System.Windows.Forms.Padding(4);
             this.btn3OfAKind.Name = "btn3OfAKind";
             this.btn3OfAKind.Size = new System.Drawing.Size(116, 28);
             this.btn3OfAKind.TabIndex = 6;
+            this.btn3OfAKind.Tag = "IsHand;3 of a kind";
             this.btn3OfAKind.Text = "3 of a kind";
             this.btn3OfAKind.UseVisualStyleBackColor = true;
-            // 
-            // lblUpperTotalCaption
-            // 
-            this.lblUpperTotalCaption.AutoSize = true;
-            this.lblUpperTotalCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperTotalCaption.Location = new System.Drawing.Point(20, 294);
-            this.lblUpperTotalCaption.Name = "lblUpperTotalCaption";
-            this.lblUpperTotalCaption.Size = new System.Drawing.Size(61, 18);
-            this.lblUpperTotalCaption.TabIndex = 12;
-            this.lblUpperTotalCaption.Text = "Total:  ";
-            // 
-            // lblUpperTotalValue
-            // 
-            this.lblUpperTotalValue.AutoSize = true;
-            this.lblUpperTotalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperTotalValue.Location = new System.Drawing.Point(117, 293);
-            this.lblUpperTotalValue.Name = "lblUpperTotalValue";
-            this.lblUpperTotalValue.Size = new System.Drawing.Size(17, 18);
-            this.lblUpperTotalValue.TabIndex = 13;
-            this.lblUpperTotalValue.Text = "0";
-            // 
-            // lblUpperBonusValue
-            // 
-            this.lblUpperBonusValue.AutoSize = true;
-            this.lblUpperBonusValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperBonusValue.Location = new System.Drawing.Point(117, 321);
-            this.lblUpperBonusValue.Name = "lblUpperBonusValue";
-            this.lblUpperBonusValue.Size = new System.Drawing.Size(17, 18);
-            this.lblUpperBonusValue.TabIndex = 15;
-            this.lblUpperBonusValue.Text = "0";
-            // 
-            // lblUpperBonusCaption
-            // 
-            this.lblUpperBonusCaption.AutoSize = true;
-            this.lblUpperBonusCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperBonusCaption.Location = new System.Drawing.Point(20, 322);
-            this.lblUpperBonusCaption.Name = "lblUpperBonusCaption";
-            this.lblUpperBonusCaption.Size = new System.Drawing.Size(61, 18);
-            this.lblUpperBonusCaption.TabIndex = 14;
-            this.lblUpperBonusCaption.Text = "Bonus:";
-            // 
-            // lblLowerBonusValue
-            // 
-            this.lblLowerBonusValue.AutoSize = true;
-            this.lblLowerBonusValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerBonusValue.Location = new System.Drawing.Point(132, 318);
-            this.lblLowerBonusValue.Name = "lblLowerBonusValue";
-            this.lblLowerBonusValue.Size = new System.Drawing.Size(17, 18);
-            this.lblLowerBonusValue.TabIndex = 24;
-            this.lblLowerBonusValue.Text = "0";
-            // 
-            // lblLowerBonusCaption
-            // 
-            this.lblLowerBonusCaption.AutoSize = true;
-            this.lblLowerBonusCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerBonusCaption.Location = new System.Drawing.Point(35, 319);
-            this.lblLowerBonusCaption.Name = "lblLowerBonusCaption";
-            this.lblLowerBonusCaption.Size = new System.Drawing.Size(61, 18);
-            this.lblLowerBonusCaption.TabIndex = 23;
-            this.lblLowerBonusCaption.Text = "Bonus:";
-            // 
-            // lblLowerTotalValue
-            // 
-            this.lblLowerTotalValue.AutoSize = true;
-            this.lblLowerTotalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerTotalValue.Location = new System.Drawing.Point(132, 290);
-            this.lblLowerTotalValue.Name = "lblLowerTotalValue";
-            this.lblLowerTotalValue.Size = new System.Drawing.Size(17, 18);
-            this.lblLowerTotalValue.TabIndex = 22;
-            this.lblLowerTotalValue.Text = "0";
-            // 
-            // lblLowerTotalCaption
-            // 
-            this.lblLowerTotalCaption.AutoSize = true;
-            this.lblLowerTotalCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerTotalCaption.Location = new System.Drawing.Point(35, 291);
-            this.lblLowerTotalCaption.Name = "lblLowerTotalCaption";
-            this.lblLowerTotalCaption.Size = new System.Drawing.Size(51, 18);
-            this.lblLowerTotalCaption.TabIndex = 21;
-            this.lblLowerTotalCaption.Text = "Total:";
             // 
             // lblScoreValue
             // 
@@ -596,7 +610,7 @@
             this.Controls.Add(this.groupBoxUpperSection);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
