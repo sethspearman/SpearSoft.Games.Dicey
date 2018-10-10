@@ -23,7 +23,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
         {
             var gameCard = GetGameCard();
 
-            var hand = gameCard.Hands.SingleOrDefault(h => h.Name == "Aces");
+            var hand = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
 
             hand.SetDice(bytes);
 

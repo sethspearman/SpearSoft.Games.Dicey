@@ -45,6 +45,37 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
         }
 
         [Test]
+        public void EmptyDice_DoesNotEqual_RolledDice()
+        {
+            var d1 = Dice.Empty;
+            var d2 = new Dice();
+            
+            d2.Roll();
+            Assert.IsTrue(!d1.Equals(d2));
+
+        }
+
+        [Test]
+        public void EmptyDice_DoesEqual_UnrolledDice()
+        {
+            var d1 = Dice.Empty;
+            var d2 = new Dice();
+
+            Assert.IsTrue(d1.Equals(d2));
+
+        }
+
+        [Test]
+        public void EmptyDice_DoesEqual_UnrolledDice2()
+        {
+            var d1 = new Dice();
+
+            var result = (d1 == Dice.Empty);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
         public void Dice_ToByteArray_ConvertsDiceValuesToMatchingArray()
         {
             //arrange
