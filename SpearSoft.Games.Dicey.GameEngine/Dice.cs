@@ -16,6 +16,9 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public static Dice Empty => new Dice(true);
 
+        /// <summary>
+        /// The Roll method should only be called by the Player class.
+        /// </summary>
         public void Roll()
         {
             foreach (var die in this) die.Roll();

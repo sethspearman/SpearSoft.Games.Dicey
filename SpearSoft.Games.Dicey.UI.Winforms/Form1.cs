@@ -34,7 +34,7 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
         {
             var dice = Globals.Dice;
 
-            if (!skipRoll) dice.Roll();
+            if (!skipRoll) Player.RollDice(dice);
 
             btnDice1.Text = dice[0].Value.ToString();
             btnDice2.Text = dice[1].Value.ToString();
@@ -46,10 +46,7 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             {
                 var gameCard = player.GameCard;
 
-                foreach (var hand in gameCard.Hands)
-                {
-                    hand.SetDice(dice.ToByteArray());
-                }
+                foreach (var hand in gameCard.Hands) hand.SetDice(dice.ToByteArray());
 
                 SetupGameCard(gameCard);
             }
@@ -69,17 +66,36 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             lbl3OfAKind.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.ThreeOfAKind)?.Score.ToString();
             lbl4OfAKind.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.FourOfAKind)?.Score.ToString();
             lblFullHouse.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.FullHouse)?.Score.ToString();
-            lblSmallStraight.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.SmallStraight)?.Score.ToString();
-            lblLargeStraight.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.LargeStraight)?.Score.ToString();
+            lblSmallStraight.Text =
+                gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.SmallStraight)?.Score.ToString();
+            lblLargeStraight.Text =
+                gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.LargeStraight)?.Score.ToString();
             lblYahtzee.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee)?.Score.ToString();
             lblChance.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Chance)?.Score.ToString();
 
-            lblScoreValue.Text = Globals.Game.CurrentPlayer.GameCard.PotentialScore.ToString();
+            SetScoreUI(gameCard);
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void SetScoreUI(GameCard gameCard)
+        {
+            lblScoreValue.Text = Globals.Game.CurrentPlayer.GameCard.PotentialScore.ToString();
+
+            lblUpperTotalValue.Text = gameCard.PotentialUpperScore.ToString();
+            lblLowerTotalValue.Text = gameCard.PotentialLowerScore.ToString();
+
+            //lblScoreValue.Text = (gameCard.UpperScore + gameCard.LowerScore).ToString();
+        }
+
+        private void SetScoreUI()
+        {
+            SetScoreUI(Globals.Game.CurrentPlayer.GameCard);
+        }
+
+        private void btnRoll_Click(object sender, EventArgs e)
         {
             SetDiceUI(false);
+            Globals.Game.CurrentPlayer.GameCard.ClearSelected();
+            SetLockedImage(this);
         }
 
         private void SetDiceButtonImage(Button button)
@@ -92,12 +108,12 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
                 button.ImageIndex = 0;
         }
 
-        private void SetHandButtonImage(Button button)
+        private void SetHandButtonImage(Button button, bool isSelected)
         {
-            if (button.ImageIndex == 0)
-                button.ImageIndex = -1;
-            else
+            if (isSelected)
                 button.ImageIndex = 0;
+            else
+                button.ImageIndex = -1;
         }
 
         private void LockDie(Button button)
@@ -139,23 +155,125 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
 
         private void btnAces_Click(object sender, EventArgs e)
         {
-            SelectHand(GameCard.Aces);
+            SetSelectedUpdateImages(sender);
+        }
 
-            foreach (Control control in this.Controls)
+        private void SetSelectedUpdateImages(object sender)
+        {
+            if (sender is Button)
             {
-                if (control is Button ctrl && ctrl.Tag.ToString().Contains("IsHand"))
+                var ctrl = sender as Button;
+
+                var tag = ctrl.Tag?.ToString() ?? string.Empty;
+                if (tag.Contains("IsHand"))
                 {
-                    var tag = ctrl.Tag.ToString();
-                    
+                    var tagvals = tag.Split(';');
+
+                    var handName = tagvals[1];
+
+                    SelectHand(handName);
+
+                    SetLockedImage(this);
+                }
+                SetScoreUI();
+            }
+        }
+
+        private void SetLockedImage(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control is Button)
+                {
+                    var c = control as Button;
+                    if ((c.Tag?.ToString() ?? "").Contains("IsHand"))
+                    {
+
+                        var tag = c.Tag?.ToString() ?? string.Empty;
+                        var tagvals = tag.Split(';');
+
+                        var handName = tagvals[1];
+                        var hand = GetHand(handName);
+                        
+                        SetHandButtonImage(c,hand.IsSelected);
+                    }
+                }
+                else
+                {
+                    SetLockedImage(control);
                 }
             }
-
         }
 
         private static void SelectHand(string handName)
         {
-            Globals.Game.CurrentPlayer.GameCard.SelectHand(
+            Globals.Game.CurrentPlayer.GameCard.SelectUnselectHand(
                 Globals.Game.CurrentPlayer.GameCard.Hands.First(h => h.Name == handName));
+        }
+
+        private static Hand GetHand(string handName)
+        {
+            return Globals.Game.CurrentPlayer.GameCard.Hands.First(h => h.Name == handName);
+        }
+
+        private void btnTwos_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnThrees_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnFours_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnFives_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnSixes_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btn3OfAKind_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btn4OfAKind_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnFullHouse_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnSmallStraight_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnLargeStraight_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnYahtzee_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
+        }
+
+        private void btnChance_Click(object sender, EventArgs e)
+        {
+            SetSelectedUpdateImages(sender);
         }
     }
 }

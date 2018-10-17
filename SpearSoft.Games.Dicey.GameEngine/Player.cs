@@ -19,17 +19,19 @@ namespace SpearSoft.Games.Dicey.GameEngine
             DiceRollCount = 0;
         }
 
-        public Dice RollDice()
+        public static void RollDice(Dice dice)
         {
-            var args = new RollDiceEventArgs(DiceRollCount);
-            OnDoRollDice(args);
+            dice.Roll();
+            
+            //var args = new RollDiceEventArgs(DiceRollCount);
+            //OnDoRollDice(args);
 
-            if (!args.Cancel)
-            {
-                return args.Dice;
-            }
+            //if (!args.Cancel)
+            //{
+            //    return args.Dice;
+            //}
 
-            return Dice.Empty;
+            //return Dice.Empty;
         }
 
         public string PlayerName { get; }

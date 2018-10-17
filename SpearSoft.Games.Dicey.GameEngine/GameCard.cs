@@ -38,15 +38,46 @@ namespace SpearSoft.Games.Dicey.GameEngine
             get { return Score + Hands.FirstOrDefault(h => h.IsSelected)?.Score ?? 0; }
         }
 
-        public void SelectHand(Hand hand)
+        public int UpperScore
         {
+            get
+            {
+                return Hands.ToList().Where(h => h.IsApplied && h.Section==Section.Upper).Sum(hand => hand.Score);
+            }
+        }
+
+        public int PotentialUpperScore
+        {
+            get { return UpperScore + Hands.FirstOrDefault(h => h.IsSelected && h.Section==Section.Upper)?.Score ?? 0; }
+        }
+
+        public int LowerScore
+        {
+            get
+            {
+                return Hands.ToList().Where(h => h.IsApplied && h.Section == Section.Lower).Sum(hand => hand.Score);
+            }
+        }
+
+        public int PotentialLowerScore
+        {
+            get
+            {
+                return UpperScore + Hands.FirstOrDefault(h => h.IsSelected && h.Section == Section.Lower)?.Score ?? 0;
+            }
+        }
+
+        public void SelectUnselectHand(Hand hand)
+        {
+            var selected = !hand.IsSelected;
+
             ClearSelected();
-            hand.IsSelected = true;
+            hand.IsSelected = selected;
         }
 
         public void ApplyHand(Hand hand)
         {
-            SelectHand(hand);
+            ClearSelected();
             //do stuff to lock in the round and emit a score for this round.
             //assumes that this is only set once for one hand.  no reset needed.
             hand.IsApplied = true;
@@ -54,7 +85,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public void ClearSelected()
         {
-            Hands.ToList().ForEach(h => h.IsSelected = false);
+            Hands.Where(h=>h.IsSelected).ToList().ForEach(h => h.IsSelected = false);
         }
 
         public GameCard()
