@@ -22,7 +22,11 @@ namespace SpearSoft.Games.Dicey.GameEngine
         public const string Chance = "Chance";
         public const string YahtzeeBonus = "Yahtzee Bonus";
 
-
+        public event EventHandler<GameCardSelectedEventArgs> GameCardSelected;
+        protected virtual void OnGameCardSelected(GameCardSelectedEventArgs e)
+        {
+            GameCardSelected?.Invoke(this, e);
+        }
         public List<Hand> Hands = null;
         
         public int Score
@@ -73,7 +77,11 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
             ClearSelected();
             hand.IsSelected = selected;
+
+            OnGameCardSelected(new GameCardSelectedEventArgs(selected));
         }
+
+        public Player Parent { get; set; }
 
         public void ApplyHand(Hand hand)
         {
@@ -178,5 +186,13 @@ namespace SpearSoft.Games.Dicey.GameEngine
         }
     }
 
+    public class GameCardSelectedEventArgs : EventArgs
+    {
+        public GameCardSelectedEventArgs(bool isSelected)
+        {
+            IsSelected = isSelected;
+        }
 
+        public bool IsSelected { get; set; }
+    }
 }

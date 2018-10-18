@@ -70,10 +70,22 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public bool GameOver()
         {
-            return this.Players.All(p => p.GameCard.Hands.All(h => h.IsApplied));
+            return this.Players.All(p => p.GameCard.Hands.Where(h=>h.Name!=GameCard.YahtzeeBonus).All(h => h.IsApplied));
         }
 
         public List<Player> Players { get; set; }
+
+        public bool RoundCompleted
+        {
+            get
+            {
+                return this.Players.All(p =>
+                {
+                    return p.GameCard.Hands.Count(h => h.IsApplied) == CurrentRound;
+
+                });
+            }
+        }
     }
 
     public class NextPlayerEventArgs:EventArgs

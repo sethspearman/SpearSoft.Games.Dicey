@@ -20,6 +20,23 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
         }
 
         [Test]
+        public void GameFlow_AllUsersRoundCompleted_GameRoundCompleted()
+        {
+            //arrange
+
+
+            //act 
+
+
+            //assert
+
+            Assert.IsTrue(true);
+
+           
+        }
+
+
+        [Test]
         public void GameInit_HasPlayer_NamedDEFAULT()
         {
 
@@ -181,6 +198,162 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             //assert
             Assert.IsTrue(game.CurrentRound == 2 && game.CurrentPlayer.PlayerName== "PLAYER1", "Player should have been (still PLAYER1) and the 2nd round");
 
+        }
+
+        [Test]
+        public void Game_AllPlayerRoundsCompleted_GameRoundCompleted()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            players.Add(new Player("PLAYER2", 2));
+
+            var game = new Game(players);
+
+            var player1 = players[0];
+            var player2 = players[1];
+            var hand1 = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+            var hand2 = player2.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+            
+            //act
+            player1.GameCard.ApplyHand(hand1);
+            player1.GameCard.ApplyHand(hand2);
+
+            //assert
+            Assert.IsTrue(game.RoundCompleted);
+        }
+        [Test]
+        public void Game_NotAllPlayerRoundsCompleted_GameRoundNotCompleted()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            players.Add(new Player("PLAYER2", 2));
+
+            var game = new Game(players);
+
+            var player1 = players[0];
+            var hand1 = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+ 
+            //act
+            player1.GameCard.ApplyHand(hand1);
+
+            //assert
+            Assert.IsFalse(game.RoundCompleted);
+        }
+
+
+        [Test]
+        public void Game_IncrementRound_IncrementsTheRound()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            players.Add(new Player("PLAYER2", 2));
+
+            var game = new Game(players);
+
+            var player1 = players[0];
+            var player2 = players[1];
+            var hand1 = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+            var hand2 = player2.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+
+            //act
+            player1.GameCard.ApplyHand(hand1);
+            player1.GameCard.ApplyHand(hand2);
+
+            game.IncrementCurrentRound();
+
+            //assert
+            Assert.IsTrue(game.CurrentRound==2);
+        }
+
+        [Test]
+        public void Game_NotAllRoundCompleted_GameNotOver()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            players.Add(new Player("PLAYER2", 2));
+
+            var game = new Game(players);
+
+            var player1 = players[0];
+            var player2 = players[1];
+            var hand1 = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+            var hand2 = player2.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+
+            //act
+            player1.GameCard.ApplyHand(hand1);
+            player1.GameCard.ApplyHand(hand2);
+
+            game.IncrementCurrentRound();
+
+            //assert
+            Assert.IsFalse(game.GameOver());
+        }
+        [Test]
+        public void Game_1PlayerAllRoundCompleted_GameOver()
+        {
+            //arrange
+
+            var game = new Game();
+
+            var player1 = game.CurrentPlayer;
+            var hand1 = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+ 
+
+            //act
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Twos));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Threes));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Fours));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Fives));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Sixes));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.ThreeOfAKind));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.FourOfAKind));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.FullHouse));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.SmallStraight));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.LargeStraight));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee));
+            player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Chance));
+            //player1.GameCard.ApplyHand(player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.YahtzeeBonus));
+            //game.IncrementCurrentRound();
+
+            //assert
+            Assert.IsTrue(game.GameOver());
+        }
+
+        [Test]
+        public void Game_CannotApplyHandTwiceInGame()
+        {
+            Assert.IsTrue(true);
+        }
+
+        [Test]
+        public void Game_2PlayerAllRoundCompleted_GameOver()
+        {
+            //arrange
+            //var players = new List<Player>();
+            //players.Add(new Player("PLAYER1", 1));
+            //players.Add(new Player("PLAYER2", 2));
+
+            //var game = new Game(players);
+
+            //var player1 = players[0];
+            //var player2 = players[1];
+            //var hand1 = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+            //var hand2 = player2.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+
+            ////act
+            //player1.GameCard.ApplyHand(hand1);
+            //player1.GameCard.ApplyHand(hand2);
+
+            //game.IncrementCurrentRound();
+
+            //assert
+            //Assert.IsFalse(game.GameOver());
+            Assert.IsTrue(true);
         }
 
     }

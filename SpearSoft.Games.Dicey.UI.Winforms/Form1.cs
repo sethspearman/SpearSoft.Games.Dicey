@@ -34,7 +34,7 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
         {
             var dice = Globals.Dice;
 
-            if (!skipRoll) Player.RollDice(dice);
+            if (!skipRoll) Globals.Game.Players[0].RollDice(dice);
 
             btnDice1.Text = dice[0].Value.ToString();
             btnDice2.Text = dice[1].Value.ToString();
