@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace SpearSoft.Games.Dicey.GameEngine
 {
@@ -22,6 +21,8 @@ namespace SpearSoft.Games.Dicey.GameEngine
         public const string Chance = "Chance";
         public const string YahtzeeBonus = "Yahtzee Bonus";
 
+        public const int BonusYahtzeePoints = 100;
+
         public event EventHandler<GameCardSelectedEventArgs> GameCardSelected;
         protected virtual void OnGameCardSelected(GameCardSelectedEventArgs e)
         {
@@ -29,13 +30,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
         }
         public List<Hand> Hands = null;
         
-        public int Score
-        {
-            get
-            {
-                return Hands.ToList().Where(h => h.IsApplied).Sum(hand => hand.Score);
-            }    
-        }
+        public int Score => LowerScore + LowerBonus + UpperScore + UpperBonus;
 
         public int PotentialScore
         {
@@ -49,6 +44,24 @@ namespace SpearSoft.Games.Dicey.GameEngine
                 return Hands.ToList().Where(h => h.IsApplied && h.Section==Section.Upper).Sum(hand => hand.Score);
             }
         }
+
+        public int UpperBonus
+        {
+            get
+            {
+                var currentScore = UpperScore;
+
+                if (currentScore>=63)
+                {
+                    return 35;
+                }
+
+                return 0;
+
+            }
+        }
+
+        public int LowerBonus => BonusYahtzeeCount * BonusYahtzeePoints;
 
         public int PotentialUpperScore
         {
@@ -82,6 +95,8 @@ namespace SpearSoft.Games.Dicey.GameEngine
         }
 
         public Player Parent { get; set; }
+
+        public int BonusYahtzeeCount { get;  set; }
 
         public void ApplyHand(Hand hand)
         {

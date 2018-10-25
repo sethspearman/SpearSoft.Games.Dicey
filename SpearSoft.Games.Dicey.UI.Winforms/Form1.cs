@@ -83,6 +83,11 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             lblUpperTotalValue.Text = gameCard.PotentialUpperScore.ToString();
             lblLowerTotalValue.Text = gameCard.PotentialLowerScore.ToString();
 
+            lblUpperBonusValue.Text = gameCard.UpperBonus.ToString();
+            lblLowerBonusValue.Text = gameCard.LowerBonus.ToString();
+
+            lblScoreValue.Text = gameCard.Score.ToString();
+
             //lblScoreValue.Text = (gameCard.UpperScore + gameCard.LowerScore).ToString();
         }
 
