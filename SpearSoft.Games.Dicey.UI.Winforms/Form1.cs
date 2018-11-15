@@ -12,7 +12,12 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             InitializeComponent();
 
             Globals.Game = new Game();
+
+#if TESTING_DICE
+            Globals.Dice = new UITestableDiceSet();
+#else
             Globals.Dice = new Dice();
+#endif
 
             Globals.Game.IncrementRound += Game_IncrementRound;
             Globals.Game.NextPlayer += Game_NextPlayer;
@@ -307,10 +312,15 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
 
         private void button1_Click(object sender, EventArgs e)
         {
+#if TESTING_DICE // You could even make adding the button to the UI conditional on the symbol
             var bytes = new byte[] { 1, 1, 1, 1, 1 };
+
             var hand = Globals.Game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
+
+            hand.SetDice(Globals.Dice); // or hand.SetDice(new UITestableDiceSet(1,1,1,1,1)); 
             //hand.SetDice(bytes);
             //Globals.Dice.Roll(bytes);
+#endif
         }
     }
 }

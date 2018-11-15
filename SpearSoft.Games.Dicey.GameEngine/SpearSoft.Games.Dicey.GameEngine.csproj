@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Configurations>Debug;Release;TestingDiceSet</Configurations>
   </PropertyGroup>
 </Project>
