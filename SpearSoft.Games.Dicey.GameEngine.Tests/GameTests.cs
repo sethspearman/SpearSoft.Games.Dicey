@@ -269,6 +269,101 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
         }
 
         [Test]
+        public void Game_YahtzeeAppliedWithoutScore_CannotApplyBonusYahtzee()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            var game = new Game(players);
+
+            //act 
+            var hand = game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
+            game.CurrentPlayer.GameCard.ApplyHand(hand);
+
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+
+            //assert
+            Assert.IsTrue(game.CurrentPlayer.GameCard.BonusYahtzeeCount==0);            
+        }
+
+        [Test]
+        public void Game_YahtzeeNotApplied_CannotApplyBonusYahtzee()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            var game = new Game(players);
+
+            //act 
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+
+            //assert
+            Assert.IsTrue(game.CurrentPlayer.GameCard.BonusYahtzeeCount == 0);
+        }
+
+        [Test]
+        public void Game_YahtzeeAppliedWithScore_CanApplyBonusYahtzee()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            var game = new Game(players);
+
+            //act 
+
+            var bytes = new byte[] { 1, 1, 1, 1, 1 };
+            var hand = game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
+            hand.SetDice(bytes);
+            game.CurrentPlayer.GameCard.ApplyHand(hand);
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+
+            //assert
+            Assert.IsTrue(game.CurrentPlayer.GameCard.BonusYahtzeeCount == 1);
+        }
+
+        [Test]
+        public void Game_YahtzeeAppliedWithNoScore_CannotApplyBonusYahtzee()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            var game = new Game(players);
+
+            //act 
+
+            var bytes = new byte[] { 1, 1, 1, 0, 0 };
+            var hand = game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
+            hand.SetDice(bytes);
+            game.CurrentPlayer.GameCard.ApplyHand(hand);
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+
+            //assert
+            Assert.IsTrue(game.CurrentPlayer.GameCard.BonusYahtzeeCount == 0);
+        }
+
+        [Test]
+        public void Game_MaxBonusYahtzees_NoMoreThan3()
+        {
+            //arrange
+            var players = new List<Player>();
+            players.Add(new Player("PLAYER1", 1));
+            var game = new Game(players);
+
+            //act 
+
+            var bytes = new byte[] { 1, 1, 1, 1, 1 };
+            var hand = game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
+            hand.SetDice(bytes);
+            game.CurrentPlayer.GameCard.ApplyHand(hand);
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+            game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+
+            //assert
+            Assert.IsTrue(game.CurrentPlayer.GameCard.BonusYahtzeeCount == 3);
+        }
+
         public void Game_NotAllRoundCompleted_GameNotOver()
         {
             //arrange

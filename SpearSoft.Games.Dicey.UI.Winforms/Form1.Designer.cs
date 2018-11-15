@@ -76,6 +76,12 @@
             this.btn3OfAKind = new System.Windows.Forms.Button();
             this.lblScoreValue = new System.Windows.Forms.Label();
             this.lblScoreCaption = new System.Windows.Forms.Label();
+            this.lblBonusYahtzees = new System.Windows.Forms.Label();
+            this.chkBonusYahtzee1 = new System.Windows.Forms.CheckBox();
+            this.chkBonusYahtzee2 = new System.Windows.Forms.CheckBox();
+            this.chkBonusYahtzee3 = new System.Windows.Forms.CheckBox();
+            this.lblCurrentPlayer = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBoxUpperSection.SuspendLayout();
             this.groupBoxLowerSection.SuspendLayout();
@@ -167,7 +173,7 @@
             // btnRoll
             // 
             this.btnRoll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoll.Location = new System.Drawing.Point(138, 440);
+            this.btnRoll.Location = new System.Drawing.Point(138, 418);
             this.btnRoll.Name = "btnRoll";
             this.btnRoll.Size = new System.Drawing.Size(75, 23);
             this.btnRoll.TabIndex = 1;
@@ -193,7 +199,7 @@
             this.groupBoxUpperSection.Controls.Add(this.btnThrees);
             this.groupBoxUpperSection.Controls.Add(this.btnTwos);
             this.groupBoxUpperSection.Controls.Add(this.btnAces);
-            this.groupBoxUpperSection.Location = new System.Drawing.Point(15, 123);
+            this.groupBoxUpperSection.Location = new System.Drawing.Point(15, 101);
             this.groupBoxUpperSection.Name = "groupBoxUpperSection";
             this.groupBoxUpperSection.Size = new System.Drawing.Size(156, 300);
             this.groupBoxUpperSection.TabIndex = 2;
@@ -204,7 +210,7 @@
             // 
             this.lblUpperBonusValue.AutoSize = true;
             this.lblUpperBonusValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperBonusValue.Location = new System.Drawing.Point(88, 261);
+            this.lblUpperBonusValue.Location = new System.Drawing.Point(88, 273);
             this.lblUpperBonusValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUpperBonusValue.Name = "lblUpperBonusValue";
             this.lblUpperBonusValue.Size = new System.Drawing.Size(15, 15);
@@ -215,7 +221,7 @@
             // 
             this.lblUpperBonusCaption.AutoSize = true;
             this.lblUpperBonusCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperBonusCaption.Location = new System.Drawing.Point(15, 262);
+            this.lblUpperBonusCaption.Location = new System.Drawing.Point(15, 274);
             this.lblUpperBonusCaption.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUpperBonusCaption.Name = "lblUpperBonusCaption";
             this.lblUpperBonusCaption.Size = new System.Drawing.Size(51, 15);
@@ -226,7 +232,7 @@
             // 
             this.lblUpperTotalValue.AutoSize = true;
             this.lblUpperTotalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperTotalValue.Location = new System.Drawing.Point(88, 238);
+            this.lblUpperTotalValue.Location = new System.Drawing.Point(88, 250);
             this.lblUpperTotalValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUpperTotalValue.Name = "lblUpperTotalValue";
             this.lblUpperTotalValue.Size = new System.Drawing.Size(15, 15);
@@ -237,7 +243,7 @@
             // 
             this.lblUpperTotalCaption.AutoSize = true;
             this.lblUpperTotalCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpperTotalCaption.Location = new System.Drawing.Point(15, 239);
+            this.lblUpperTotalCaption.Location = new System.Drawing.Point(15, 251);
             this.lblUpperTotalCaption.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUpperTotalCaption.Name = "lblUpperTotalCaption";
             this.lblUpperTotalCaption.Size = new System.Drawing.Size(51, 15);
@@ -372,6 +378,10 @@
             // 
             // groupBoxLowerSection
             // 
+            this.groupBoxLowerSection.Controls.Add(this.chkBonusYahtzee3);
+            this.groupBoxLowerSection.Controls.Add(this.chkBonusYahtzee2);
+            this.groupBoxLowerSection.Controls.Add(this.chkBonusYahtzee1);
+            this.groupBoxLowerSection.Controls.Add(this.lblBonusYahtzees);
             this.groupBoxLowerSection.Controls.Add(this.lblLowerBonusValue);
             this.groupBoxLowerSection.Controls.Add(this.lblLowerBonusCaption);
             this.groupBoxLowerSection.Controls.Add(this.lblLowerTotalValue);
@@ -390,7 +400,7 @@
             this.groupBoxLowerSection.Controls.Add(this.btnFullHouse);
             this.groupBoxLowerSection.Controls.Add(this.btn4OfAKind);
             this.groupBoxLowerSection.Controls.Add(this.btn3OfAKind);
-            this.groupBoxLowerSection.Location = new System.Drawing.Point(180, 124);
+            this.groupBoxLowerSection.Location = new System.Drawing.Point(180, 102);
             this.groupBoxLowerSection.Name = "groupBoxLowerSection";
             this.groupBoxLowerSection.Size = new System.Drawing.Size(174, 298);
             this.groupBoxLowerSection.TabIndex = 3;
@@ -401,7 +411,7 @@
             // 
             this.lblLowerBonusValue.AutoSize = true;
             this.lblLowerBonusValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerBonusValue.Location = new System.Drawing.Point(99, 258);
+            this.lblLowerBonusValue.Location = new System.Drawing.Point(99, 270);
             this.lblLowerBonusValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLowerBonusValue.Name = "lblLowerBonusValue";
             this.lblLowerBonusValue.Size = new System.Drawing.Size(15, 15);
@@ -412,7 +422,7 @@
             // 
             this.lblLowerBonusCaption.AutoSize = true;
             this.lblLowerBonusCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerBonusCaption.Location = new System.Drawing.Point(26, 259);
+            this.lblLowerBonusCaption.Location = new System.Drawing.Point(26, 271);
             this.lblLowerBonusCaption.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLowerBonusCaption.Name = "lblLowerBonusCaption";
             this.lblLowerBonusCaption.Size = new System.Drawing.Size(51, 15);
@@ -423,7 +433,7 @@
             // 
             this.lblLowerTotalValue.AutoSize = true;
             this.lblLowerTotalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerTotalValue.Location = new System.Drawing.Point(99, 236);
+            this.lblLowerTotalValue.Location = new System.Drawing.Point(99, 248);
             this.lblLowerTotalValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLowerTotalValue.Name = "lblLowerTotalValue";
             this.lblLowerTotalValue.Size = new System.Drawing.Size(15, 15);
@@ -434,7 +444,7 @@
             // 
             this.lblLowerTotalCaption.AutoSize = true;
             this.lblLowerTotalCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLowerTotalCaption.Location = new System.Drawing.Point(26, 236);
+            this.lblLowerTotalCaption.Location = new System.Drawing.Point(26, 248);
             this.lblLowerTotalCaption.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLowerTotalCaption.Name = "lblLowerTotalCaption";
             this.lblLowerTotalCaption.Size = new System.Drawing.Size(43, 15);
@@ -592,7 +602,7 @@
             // 
             this.lblScoreValue.AutoSize = true;
             this.lblScoreValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScoreValue.Location = new System.Drawing.Point(326, 440);
+            this.lblScoreValue.Location = new System.Drawing.Point(326, 418);
             this.lblScoreValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblScoreValue.Name = "lblScoreValue";
             this.lblScoreValue.Size = new System.Drawing.Size(19, 20);
@@ -603,18 +613,80 @@
             // 
             this.lblScoreCaption.AutoSize = true;
             this.lblScoreCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScoreCaption.Location = new System.Drawing.Point(250, 441);
+            this.lblScoreCaption.Location = new System.Drawing.Point(250, 419);
             this.lblScoreCaption.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblScoreCaption.Name = "lblScoreCaption";
             this.lblScoreCaption.Size = new System.Drawing.Size(61, 20);
             this.lblScoreCaption.TabIndex = 25;
             this.lblScoreCaption.Text = "Score:";
             // 
+            // lblBonusYahtzees
+            // 
+            this.lblBonusYahtzees.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBonusYahtzees.Location = new System.Drawing.Point(6, 225);
+            this.lblBonusYahtzees.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBonusYahtzees.Name = "lblBonusYahtzees";
+            this.lblBonusYahtzees.Size = new System.Drawing.Size(87, 14);
+            this.lblBonusYahtzees.TabIndex = 25;
+            this.lblBonusYahtzees.Text = "Bonus Yahtzees:";
+            // 
+            // chkBonusYahtzee1
+            // 
+            this.chkBonusYahtzee1.AutoSize = true;
+            this.chkBonusYahtzee1.Enabled = false;
+            this.chkBonusYahtzee1.Location = new System.Drawing.Point(99, 225);
+            this.chkBonusYahtzee1.Name = "chkBonusYahtzee1";
+            this.chkBonusYahtzee1.Size = new System.Drawing.Size(15, 14);
+            this.chkBonusYahtzee1.TabIndex = 26;
+            this.chkBonusYahtzee1.UseVisualStyleBackColor = true;
+            this.chkBonusYahtzee1.CheckedChanged += new System.EventHandler(this.chkBonusYahtzee1_CheckedChanged);
+            // 
+            // chkBonusYahtzee2
+            // 
+            this.chkBonusYahtzee2.AutoSize = true;
+            this.chkBonusYahtzee2.Enabled = false;
+            this.chkBonusYahtzee2.Location = new System.Drawing.Point(120, 225);
+            this.chkBonusYahtzee2.Name = "chkBonusYahtzee2";
+            this.chkBonusYahtzee2.Size = new System.Drawing.Size(15, 14);
+            this.chkBonusYahtzee2.TabIndex = 27;
+            this.chkBonusYahtzee2.UseVisualStyleBackColor = true;
+            // 
+            // chkBonusYahtzee3
+            // 
+            this.chkBonusYahtzee3.AutoSize = true;
+            this.chkBonusYahtzee3.Enabled = false;
+            this.chkBonusYahtzee3.Location = new System.Drawing.Point(139, 225);
+            this.chkBonusYahtzee3.Name = "chkBonusYahtzee3";
+            this.chkBonusYahtzee3.Size = new System.Drawing.Size(15, 14);
+            this.chkBonusYahtzee3.TabIndex = 28;
+            this.chkBonusYahtzee3.UseVisualStyleBackColor = true;
+            // 
+            // lblCurrentPlayer
+            // 
+            this.lblCurrentPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentPlayer.Location = new System.Drawing.Point(20, 419);
+            this.lblCurrentPlayer.Name = "lblCurrentPlayer";
+            this.lblCurrentPlayer.Size = new System.Drawing.Size(100, 23);
+            this.lblCurrentPlayer.TabIndex = 27;
+            this.lblCurrentPlayer.Text = "Player 1";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(340, 35);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(17, 23);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 475);
+            this.ClientSize = new System.Drawing.Size(369, 458);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lblCurrentPlayer);
             this.Controls.Add(this.lblScoreValue);
             this.Controls.Add(this.groupBoxLowerSection);
             this.Controls.Add(this.lblScoreCaption);
@@ -681,6 +753,12 @@
         private System.Windows.Forms.Label lblLowerTotalCaption;
         private System.Windows.Forms.Label lblScoreValue;
         private System.Windows.Forms.Label lblScoreCaption;
+        private System.Windows.Forms.Label lblBonusYahtzees;
+        private System.Windows.Forms.CheckBox chkBonusYahtzee3;
+        private System.Windows.Forms.CheckBox chkBonusYahtzee2;
+        private System.Windows.Forms.CheckBox chkBonusYahtzee1;
+        private System.Windows.Forms.Label lblCurrentPlayer;
+        private System.Windows.Forms.Button button1;
     }
 }
 

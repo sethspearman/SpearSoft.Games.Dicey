@@ -24,12 +24,20 @@ namespace SpearSoft.Games.Dicey.GameEngine
         public const int BonusYahtzeePoints = 100;
 
         public event EventHandler<GameCardSelectedEventArgs> GameCardSelected;
+        public event EventHandler<GameHandAppliedEventArgs> GameHandApplied;
         protected virtual void OnGameCardSelected(GameCardSelectedEventArgs e)
         {
             GameCardSelected?.Invoke(this, e);
         }
+
+        protected virtual void OnGameHandApplied(GameHandAppliedEventArgs e)
+        {
+            GameHandApplied?.Invoke(this, e);
+        }
+
         public List<Hand> Hands = null;
-        
+        private int _bonusYahtzeeCount;
+
         public int Score => LowerScore + LowerBonus + UpperScore + UpperBonus;
 
         public int PotentialScore
@@ -96,7 +104,18 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public Player Parent { get; set; }
 
-        public int BonusYahtzeeCount { get;  set; }
+        public int BonusYahtzeeCount
+        {
+            get { return _bonusYahtzeeCount; }
+            set {
+                var hand = Hands.First(h => h.Name == GameCard.Yahtzee);
+
+                if (hand.IsApplied && hand.Score>0 && _bonusYahtzeeCount<=2)
+                {
+                    _bonusYahtzeeCount = value;
+                }
+            }
+        }
 
         public void ApplyHand(Hand hand)
         {
@@ -104,6 +123,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
             //do stuff to lock in the round and emit a score for this round.
             //assumes that this is only set once for one hand.  no reset needed.
             hand.IsApplied = true;
+            OnGameHandApplied(new GameHandAppliedEventArgs(hand));
         }
 
         public void ClearSelected()
@@ -210,4 +230,15 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public bool IsSelected { get; set; }
     }
+
+    public class GameHandAppliedEventArgs : EventArgs
+    {
+        public GameHandAppliedEventArgs(Hand hand)
+        {
+            Hand = hand;
+        }
+
+        public Hand Hand { get; }
+    }
+
 }

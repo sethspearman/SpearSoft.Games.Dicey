@@ -17,7 +17,17 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
             Globals.Game.IncrementRound += Game_IncrementRound;
             Globals.Game.NextPlayer += Game_NextPlayer;
 
+            Globals.Game.CurrentPlayer.GameCard.GameHandApplied += GameCard_GameHandApplied;
+
             SetDiceUI(true);
+        }
+
+        private void GameCard_GameHandApplied(object sender, GameHandAppliedEventArgs e)
+        {
+            if (e.Hand.Name==GameCard.Yahtzee)
+            {
+                chkBonusYahtzee1.Enabled = true;
+            }
         }
 
         private void Game_NextPlayer(object sender, NextPlayerEventArgs e)
@@ -72,6 +82,8 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
                 gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.LargeStraight)?.Score.ToString();
             lblYahtzee.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee)?.Score.ToString();
             lblChance.Text = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Chance)?.Score.ToString();
+
+            lblCurrentPlayer.Text = Globals.Game.CurrentPlayer.PlayerName;
 
             SetScoreUI(gameCard);
         }
@@ -279,6 +291,26 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
         private void btnChance_Click(object sender, EventArgs e)
         {
             SetSelectedUpdateImages(sender);
+        }
+
+        private void chkBonusYahtzee1_CheckedChanged(object sender, EventArgs e)
+        {
+            //var hand = Globals.Game.CurrentPlayer.GameCard.Hands.First(h => h.Name == GameCard.Yahtzee);
+            var hand = GetHand(GameCard.Yahtzee);
+
+            if (hand.IsApplied)
+            {
+                Globals.Game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var bytes = new byte[] { 1, 1, 1, 1, 1 };
+            var hand = Globals.Game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
+            //hand.SetDice(bytes);
+            //Globals.Dice.Roll(bytes);
         }
     }
 }
