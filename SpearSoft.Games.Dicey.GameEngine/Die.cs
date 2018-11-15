@@ -2,23 +2,28 @@
 
 namespace SpearSoft.Games.Dicey.GameEngine
 {
-    public class Die
+    public interface IDie
     {
-        public Die(byte position)
+        bool Locked { get; set; }
+        byte Value { get; }
+
+        void Roll();
+    }
+
+    public class Die : IDie
+    {
+        public Die()
         {
             this.Value = Rand.GetByte();
-            Position = position;
         }
 
-        public Die(byte position, byte initialValue)
+        public Die(byte initialValue)
         {
             this.Value = initialValue;
-            Position = position;
         }
 
         public byte Value { get; private set; }
         public bool Locked { get; set; }
-        public byte Position { get; private set; }
 
         public void Roll()
         {

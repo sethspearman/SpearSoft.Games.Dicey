@@ -8,7 +8,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
     {
         private const int MaxRollCount = 3;
 
-        public event EventHandler<RollDiceEventArgs> DoRollDice;
+        //public event EventHandler<RollDiceEventArgs> DoRollDice;
         public int Order { get; }
         public byte DiceRollCount { get; private set; }
         public bool HandSelected { get; private set; }
@@ -31,7 +31,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
             HandSelected = e.IsSelected;
         }
 
-        public void RollDice(Dice dice)
+        public void RollDice(IDiceSet dice)
         {
             dice.Roll();
 
@@ -78,20 +78,20 @@ namespace SpearSoft.Games.Dicey.GameEngine
             return GameCard.Hands.Count(h => h.IsApplied) == Round;
         }
 
-        protected virtual void OnDoRollDice(RollDiceEventArgs e)
-        {
-            DoRollDice?.Invoke(this, e);
-        }
+        //protected virtual void OnDoRollDice(RollDiceEventArgs e)
+        //{
+        //    DoRollDice?.Invoke(this, e);
+        //}
     }
 
-    public class RollDiceEventArgs:CancelEventArgs
-    {
-        public RollDiceEventArgs(byte diceRollCount)
-        {
-            DiceRollCount = diceRollCount;
-        }
-        public byte DiceRollCount { get; }
-        //RETURNS THE RESULT OF ROLLING 
-        public Dice Dice { get; set; }
-    }
+    //public class RollDiceEventArgs:CancelEventArgs
+    //{
+    //    public RollDiceEventArgs(byte diceRollCount)
+    //    {
+    //        DiceRollCount = diceRollCount;
+    //    }
+    //    public byte DiceRollCount { get; }
+    //    //RETURNS THE RESULT OF ROLLING 
+    //    public Dice Dice { get; set; }
+    //}
 }

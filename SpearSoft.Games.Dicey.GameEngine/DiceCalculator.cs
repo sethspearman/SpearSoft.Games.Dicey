@@ -12,8 +12,8 @@ namespace SpearSoft.Games.Dicey.GameEngine
     /// </summary>
     internal class DiceCalculator
     {
-        private readonly List<Func<byte[], bool>> _rules;
-        private readonly Func<byte[], int> _scoreFormula;
+        private readonly List<Func<IEnumerable<IDie>, bool>> _rules;
+        private readonly Func<IEnumerable<IDie>, int> _scoreFormula;
 
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
         /// <param name="scoreFormula"></param>
         /// <param name="name"></param>
         /// <param name="scoreDescription"></param>
-        public DiceCalculator(List<Func<byte[], bool>> rules, Func<byte[], int> scoreFormula, string name, string scoreDescription)
+        public DiceCalculator(List<Func<IEnumerable<IDie>, bool>> rules, Func<IEnumerable<IDie>, int> scoreFormula, string name, string scoreDescription)
         {
             _rules = rules;
             _scoreFormula = scoreFormula;
@@ -37,14 +37,14 @@ namespace SpearSoft.Games.Dicey.GameEngine
         public string Name { get; }
         public string ScoreDescription { get; }
 
-        public DiceCalculationResult Calculate(byte[] diceValues)
+        public DiceCalculationResult Calculate(IDiceSet dice)
         {
             var isValid = true;
-            int score = _scoreFormula.Invoke(diceValues);
+            int score = _scoreFormula.Invoke(dice);
 
             foreach (var r in _rules)
             {
-                if (r.Invoke(diceValues) == false)
+                if (r.Invoke(dice) == false)
                 {
                     isValid = false;
                     break;

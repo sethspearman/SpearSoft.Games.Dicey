@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Serialization;
+﻿using System.Linq;
 using NUnit.Framework;
 
 namespace SpearSoft.Games.Dicey.GameEngine.Tests
@@ -18,13 +14,13 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             var player1 = game.CurrentPlayer;
 
             //var gameCard = GetGameCard();
-            SetupUpperHand(player1, bytes);
+            SetupUpperHand(player1, new MockDiceSet(bytes));
 
             //act
             var upperBonus = player1.GameCard.UpperBonus;
 
             //assert
-            Assert.IsTrue(upperBonus==35);
+            Assert.IsTrue(upperBonus == 35);
 
         }
 
@@ -38,7 +34,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             //var gameCard = GetGameCard();
 
-            SetupUpperHand(player1, bytes);
+            SetupUpperHand(player1, new MockDiceSet(bytes));
 
             //act
             var upperBonus = player1.GameCard.UpperBonus;
@@ -55,8 +51,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             var game = new Game();
             var player1 = game.CurrentPlayer;
 
-            var bytes = new byte[] { 6, 6, 6, 0, 0 };
-            SetupUpperHand(player1, bytes);
+            SetupUpperHand(player1, new MockDiceSet(6,6,6,0,0));
 
             SetupLowerHand(player1);
 
@@ -66,59 +61,50 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             var grandTotal = player1.GameCard.Score;
 
             //assert
-            Assert.IsTrue(grandTotal==35+63+25+50+17+100);
-            
+            Assert.IsTrue(grandTotal == 35 + 63 + 25 + 50 + 17 + 100);
+
         }
 
         private static void SetupLowerHand(Player player1)
         {
-            byte[] bytes;
-
-            bytes = new byte[] {1, 1, 1, 2, 2}; //25
             var hand = player1.GameCard.Hands?.SingleOrDefault(h => h.Name == GameCard.FullHouse);
-            hand.SetDice(bytes);
+            hand.SetDice(new MockDiceSet(1, 1, 1, 2, 2)); // 25
             player1.GameCard.ApplyHand(hand);
 
-            bytes = new byte[] {5, 5, 5, 1, 1}; //17 points
             hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.ThreeOfAKind);
-            hand.SetDice(bytes);
+            hand.SetDice(new MockDiceSet(5,5,5,1,1)); // 17 
             player1.GameCard.ApplyHand(hand);
 
-            bytes = new byte[] { 5, 5, 5, 5, 5 }; //50 points
             hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
-            hand.SetDice(bytes);
+            hand.SetDice(new MockDiceSet(5,5,5,5,5)); // 50
             player1.GameCard.ApplyHand(hand);
         }
 
-        private static void SetupUpperHand(Player player1,byte[] sixBytes)
+        private static void SetupUpperHand(Player player1, IDiceSet sixes)
         {
-            var bytes = new byte[] {1, 1, 1, 0, 0};
-            var hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
-            hand.SetDice(bytes);
-            player1.GameCard.ApplyHand(hand);
-
-            bytes = new byte[] {2, 2, 2, 0, 0};
-            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Twos);
-            hand.SetDice(bytes);
-            player1.GameCard.ApplyHand(hand);
-
-            bytes = new byte[] {3, 3, 3, 0, 0};
-            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Threes);
-            hand.SetDice(bytes);
-            player1.GameCard.ApplyHand(hand);
-
-            bytes = new byte[] {4, 4, 4, 0, 0};
-            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Fours);
-            hand.SetDice(bytes);
-            player1.GameCard.ApplyHand(hand);
-
-            bytes = new byte[] {5, 5, 5, 0, 0};
-            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Fives);
-            hand.SetDice(bytes);
-            player1.GameCard.ApplyHand(hand);
             
+            var hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
+            hand.SetDice(new MockDiceSet(1,1,1,0,0));
+            player1.GameCard.ApplyHand(hand);
+
+            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Twos);
+            hand.SetDice(new MockDiceSet(2,2,2,0,0));
+            player1.GameCard.ApplyHand(hand);
+
+            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Threes);
+            hand.SetDice(new MockDiceSet(3,3,3,0,0));
+            player1.GameCard.ApplyHand(hand);
+
+            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Fours);
+            hand.SetDice(new MockDiceSet(4,4,4,0,0));
+            player1.GameCard.ApplyHand(hand);
+
+            hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Fives);
+            hand.SetDice(new MockDiceSet(5,5,5,0,0));
+            player1.GameCard.ApplyHand(hand);
+
             hand = player1.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Sixes);
-            hand.SetDice(sixBytes);
+            hand.SetDice(sixes);
             player1.GameCard.ApplyHand(hand);
         }
     }

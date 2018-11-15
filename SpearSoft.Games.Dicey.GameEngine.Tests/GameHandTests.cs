@@ -25,7 +25,7 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             var hand = gameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Aces);
 
-            hand.SetDice(bytes);
+            hand.SetDice(new MockDiceSet(bytes));
 
             Assert.IsTrue(hand.Score==expected);
         }

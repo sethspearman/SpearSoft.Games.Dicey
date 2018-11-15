@@ -24,7 +24,7 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
 
         private void GameCard_GameHandApplied(object sender, GameHandAppliedEventArgs e)
         {
-            if (e.Hand.Name==GameCard.Yahtzee)
+            if (e.Hand.Name == GameCard.Yahtzee)
             {
                 chkBonusYahtzee1.Enabled = true;
             }
@@ -46,17 +46,17 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
 
             if (!skipRoll) Globals.Game.Players[0].RollDice(dice);
 
-            btnDice1.Text = dice[0].Value.ToString();
-            btnDice2.Text = dice[1].Value.ToString();
-            btnDice3.Text = dice[2].Value.ToString();
-            btnDice4.Text = dice[3].Value.ToString();
-            btnDice5.Text = dice[4].Value.ToString();
+            btnDice1.Text = dice.GetDieByPosition(0).Value.ToString();
+            btnDice2.Text = dice.GetDieByPosition(1).Value.ToString();
+            btnDice3.Text = dice.GetDieByPosition(2).Value.ToString();
+            btnDice4.Text = dice.GetDieByPosition(3).Value.ToString();
+            btnDice5.Text = dice.GetDieByPosition(4).Value.ToString();
 
             foreach (var player in Globals.Game.Players)
             {
                 var gameCard = player.GameCard;
 
-                foreach (var hand in gameCard.Hands) hand.SetDice(dice.ToByteArray());
+                foreach (var hand in gameCard.Hands) hand.SetDice(dice);
 
                 SetupGameCard(gameCard);
             }
@@ -211,8 +211,8 @@ namespace SpearSoft.Games.Dicey.UI.Winforms
 
                         var handName = tagvals[1];
                         var hand = GetHand(handName);
-                        
-                        SetHandButtonImage(c,hand.IsSelected);
+
+                        SetHandButtonImage(c, hand.IsSelected);
                     }
                 }
                 else
