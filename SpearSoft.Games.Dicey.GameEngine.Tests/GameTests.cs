@@ -310,10 +310,8 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
             var game = new Game(players);
 
             //act 
-
-            var bytes = new byte[] { 1, 1, 1, 1, 1 };
             var hand = game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
-            hand.SetDice(bytes);
+            hand.SetDice(new MockDiceSet(1,1,1,1,1));
             game.CurrentPlayer.GameCard.ApplyHand(hand);
             game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
 
@@ -331,9 +329,8 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             //act 
 
-            var bytes = new byte[] { 1, 1, 1, 0, 0 };
             var hand = game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
-            hand.SetDice(bytes);
+            hand.SetDice(new MockDiceSet(1,1,1,0,0));
             game.CurrentPlayer.GameCard.ApplyHand(hand);
             game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
 
@@ -351,9 +348,8 @@ namespace SpearSoft.Games.Dicey.GameEngine.Tests
 
             //act 
 
-            var bytes = new byte[] { 1, 1, 1, 1, 1 };
             var hand = game.CurrentPlayer.GameCard.Hands.SingleOrDefault(h => h.Name == GameCard.Yahtzee);
-            hand.SetDice(bytes);
+            hand.SetDice(new MockDiceSet(1,1,1,1,1));
             game.CurrentPlayer.GameCard.ApplyHand(hand);
             game.CurrentPlayer.GameCard.BonusYahtzeeCount++;
             game.CurrentPlayer.GameCard.BonusYahtzeeCount++;

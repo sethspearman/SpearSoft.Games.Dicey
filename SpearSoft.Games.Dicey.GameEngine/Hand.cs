@@ -6,7 +6,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
     public class Hand
     {
 
-        public Hand(string name, string formulaDescription, Func<byte[], int> scoreFormula, List<Func<byte[], bool>> scoreCalculationRules, Section section)
+        public Hand(string name, string formulaDescription, Func<IEnumerable<IDie>, int> scoreFormula, List<Func<IEnumerable<IDie>, bool>> scoreCalculationRules, Section section)
         {
             Name = name;
             FormulaDescription = formulaDescription;
@@ -18,9 +18,9 @@ namespace SpearSoft.Games.Dicey.GameEngine
         
         public string FormulaDescription { get; }
 
-        public Func<byte[], int> ScoreFormula { get; }
+        public Func<IEnumerable<IDie>, int> ScoreFormula { get; }
 
-        public List<Func<byte[], bool>> ScoreCalculationRules { get; }
+        public List<Func<IEnumerable<IDie>, bool>> ScoreCalculationRules { get; }
 
         public Section Section { get; }
 
@@ -34,9 +34,9 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public bool IsApplied { get; set; }
 
-        private byte[] _dice;
+        private IEnumerable<IDie> _dice;
 
-        public void SetDice(byte[] dice)
+        public void SetDice(IEnumerable<IDie> dice)
         {
             _dice = dice;
 

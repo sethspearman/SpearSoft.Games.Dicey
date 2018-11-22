@@ -3,7 +3,13 @@ using System.Linq;
 
 namespace SpearSoft.Games.Dicey.GameEngine
 {
-    public class Dice : List<Die>
+    public interface IDiceSet : IList<IDie>
+    {
+        void Roll();
+        IDie GetDieByPosition(byte position);        
+    }
+
+    public class Dice : List<IDie>, IDiceSet 
     {
         private Dice(bool empty) : this()
         {
@@ -11,7 +17,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
 
         public Dice()
         {
-            for (byte i = 1; i <= 5; i++) Add(new Die(i, 0));
+            for (byte i = 1; i <= 5; i++) Add(new Die(0));
         }
 
         public static Dice Empty => new Dice(true);
@@ -24,15 +30,9 @@ namespace SpearSoft.Games.Dicey.GameEngine
             foreach (var die in this) die.Roll();
         }
 
-        public Die GetDieByPosition(byte position)
+        public IDie GetDieByPosition(byte position)
         {
-            return this.First(d => d.Position == position);
-        }
-
-        public byte GetByteByPosition(byte position)
-        {
-            var die = this.First(d => d.Position == position);
-            return die.Value;
+            return this.ElementAt(position);
         }
 
         public byte[] ToByteArray()
@@ -50,7 +50,7 @@ namespace SpearSoft.Games.Dicey.GameEngine
         #region System Overrides (GetHashCode, Equals, and == and != operators)
 
         // all this because I want to be able to do Dice dice = Dice.Empty;
-        
+
         // https://stackoverflow.com/questions/371328/why-is-it-important-to-override-gethashcode-when-equals-method-is-overridden
         public override bool Equals(object obj)
         {

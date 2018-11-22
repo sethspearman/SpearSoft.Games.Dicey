@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug;Release;TestingDiceSet</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="nunit" Version="3.10.1" />
